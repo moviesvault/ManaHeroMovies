@@ -12,8 +12,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // const HEROES_DATA_URL = 'https://youractualdomain.com/api/heroes';
 
     // Option 2: If you are using the direct *.workers.dev URL
-    const MOVIES_DATA_URL = 'https://your-worker-name.your-cloudflare-username.workers.dev/movies';
-    const HEROES_DATA_URL = 'https://your-worker-name.your-cloudflare-username.workers.dev/heroes';
+    const MOVIES_DATA_URL = 'https://mana-hero-movies.digimoviesvault.workers.dev/movies';
+    const HEROES_DATA_URL = 'https://mana-hero-movies.digimoviesvault.workers.dev/heroes';
     // ===================================================================================
 
 
