@@ -14,20 +14,20 @@
     <link rel="canonical" href="https://manaheromovies.pages.dev/"> <!-- UPDATE THIS with your actual website URL -->
 
     <!-- Open Graph / Facebook Meta Tags -->
-    <meta property="og:title" content="Telugu Movie Showcase - Discover, Filter & Watch Films">
-    <meta property="og:description"
-        content="Explore a vast collection of Telugu movies. Search, filter, sort, and discover new and classic Telugu films in HD.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="YOUR_WEBSITE_URL_HERE"> <!-- UPDATE THIS with your actual website URL -->
-    <meta property="og:image" content="YOUR_DEFAULT_SOCIAL_IMAGE_URL_HERE"> <!-- UPDATE THIS with a default social image URL (e.g., your 512x512 icon or a banner) -->
-    <meta property="og:site_name" content="Telugu Movie Showcase">
+<!--     <meta property="og:title" content="Telugu Movie Showcase - Discover, Filter & Watch Films"> -->
+<!--     <meta property="og:description" -->
+<!--         content="Explore a vast collection of Telugu movies. Search, filter, sort, and discover new and classic Telugu films in HD."> -->
+<!--     <meta property="og:type" content="website"> -->
+<!--     <meta property="og:url" content="YOUR_WEBSITE_URL_HERE"> <!-- UPDATE THIS with your actual website URL --> -->
+<!--     <meta property="og:image" content="YOUR_DEFAULT_SOCIAL_IMAGE_URL_HERE"> <!-- UPDATE THIS with a default social image URL (e.g., your 512x512 icon or a banner) --> -->
+<!--     <meta property="og:site_name" content="Telugu Movie Showcase"> -->
 
     <!-- Twitter Meta Tags -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Telugu Movie Showcase - Discover, Filter & Watch Films">
-    <meta name="twitter:description"
-        content="Explore a vast collection of Telugu movies. Search, filter, sort, and discover new and classic Telugu films in HD.">
-    <meta name="twitter:image" content="YOUR_DEFAULT_SOCIAL_IMAGE_URL_HERE"> <!-- UPDATE THIS with a default social image URL -->
+<!--     <meta name="twitter:card" content="summary_large_image"> -->
+<!--     <meta name="twitter:title" content="Telugu Movie Showcase - Discover, Filter & Watch Films"> -->
+<!--     <meta name="twitter:description" -->
+<!--         content="Explore a vast collection of Telugu movies. Search, filter, sort, and discover new and classic Telugu films in HD."> -->
+<!--     <meta name="twitter:image" content="YOUR_DEFAULT_SOCIAL_IMAGE_URL_HERE"> <!-- UPDATE THIS with a default social image URL --> -->
 
     <!-- Favicons and Manifest (assuming they are in /assets/icons/ folder) -->
     <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
@@ -55,12 +55,12 @@
     {
         "@context": "https://schema.org",
         "@type": "WebSite",
-        "name": "Telugu Movie Showcase",
-        "url": "https://manaheromovies.pages.dev/", <!-- UPDATE THIS -->
-        "description": "Discover and watch a wide variety of Telugu movies. Search by title or filter by hero, year and sort.",
+        "name": "ManaHeroMovies - Telugu Movie Showcase", <!-- You can refine this name too -->
+        "url": "https://manaheromovies.pages.dev/",
+        "description": "Discover your favorite Telugu hero's movies! Search, filter by actor or year, and sort a vast collection of classic and new Tollywood films on ManaHeroMovies.", <!-- Match your meta description -->
         "potentialAction": {
             "@type": "SearchAction",
-            "target": "YOUR_WEBSITE_URL_HERE#search-{search_term_string}", <!-- UPDATE THIS -->
+            "target": "https://manaheromovies.pages.dev/", <!-- Points to your main page -->
             "query-input": "required name=search_term_string"
         }
     }
@@ -70,15 +70,27 @@
     {
         "@context": "https://schema.org",
         "@type": "CollectionPage",
-        "name": "Telugu Movie Collection - Discover, Filter & Watch Films",
-        "description": "A collection page showcasing various Telugu movies available for discovery. Search, filter, and find your favorite Telugu films.",
-        "url": "YOUR_WEBSITE_URL_HERE", <!-- UPDATE THIS -->
+        "name": "ManaHeroMovies - Telugu Movie Collection & Hero Filmography",
+        "description": "Explore ManaHeroMovies for a comprehensive collection of Telugu movies. Discover films by your favorite heroes, filter by year, and sort through classic and new Tollywood cinema.",
+        "url": "https://manaheromovies.pages.dev/",
         "mainEntity": {
             "@type": "ItemList",
-            "name": "Telugu Movies List",
-            "description": "List of Telugu movies featured on this site."
-            // You could potentially list a few item @type: "Movie" here if you wanted to pre-populate some for SEO,
-            // but the dynamic loading handles the user experience.
+            "name": "Telugu Movies List on ManaHeroMovies",
+            "description": "A dynamically updated list of Telugu movies available for browsing and discovery on ManaHeroMovies, featuring various actors and release years."
+            // As noted before, you could list a few static "Movie" items here,
+            // but it's not strictly necessary as your content is dynamic.
+            // Example of one static item (optional, and you'd need to keep it updated if you did this):
+            // "itemListElement": [
+            //   {
+            //     "@type": "ListItem",
+            //     "position": 1,
+            //     "item": {
+            //       "@type": "Movie",
+            //       "name": "A Sample Movie Title",
+            //       "url": "https://manaheromovies.pages.dev/#" // Link to the movie if you had individual movie pages or anchors
+            //     }
+            //   }
+            // ]
         }
     }
     </script>
