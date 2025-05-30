@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Telugu Movie Showcase - Discover, Filter & Watch Films</title>
+    <meta name="description"
+        content="Explore a vast collection of Telugu movies. Search by title, filter by hero or year, sort, and discover new and classic Telugu films. Click to watch your favorite movies in HD.">
+    <meta name="keywords"
+        content="telugu movies, telugu films, watch telugu movies, new telugu movies, telugu cinema, movie showcase, HD telugu movies, filter telugu movies, sort telugu movies">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="YOUR_WEBSITE_URL_HERE"> <!-- UPDATE THIS with your actual website URL -->
+
+    <!-- Open Graph / Facebook Meta Tags -->
+    <meta property="og:title" content="Telugu Movie Showcase - Discover, Filter & Watch Films">
+    <meta property="og:description"
+        content="Explore a vast collection of Telugu movies. Search, filter, sort, and discover new and classic Telugu films in HD.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="YOUR_WEBSITE_URL_HERE"> <!-- UPDATE THIS with your actual website URL -->
+    <meta property="og:image" content="YOUR_DEFAULT_SOCIAL_IMAGE_URL_HERE"> <!-- UPDATE THIS with a default social image URL (e.g., your 512x512 icon or a banner) -->
+    <meta property="og:site_name" content="Telugu Movie Showcase">
+
+    <!-- Twitter Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Telugu Movie Showcase - Discover, Filter & Watch Films">
+    <meta name="twitter:description"
+        content="Explore a vast collection of Telugu movies. Search, filter, sort, and discover new and classic Telugu films in HD.">
+    <meta name="twitter:image" content="YOUR_DEFAULT_SOCIAL_IMAGE_URL_HERE"> <!-- UPDATE THIS with a default social image URL -->
+
+    <!-- Favicons and Manifest (assuming they are in /assets/icons/ folder) -->
+    <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/assets/icons/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/assets/icons/android-chrome-512x512.png">
+    <!-- <link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml"> --> <!-- Optional SVG -->
+    <link rel="manifest" href="/assets/icons/site.webmanifest">
+    <meta name="theme-color" content="#ff0000"> <!-- Optional: Set a theme color for browser UI elements on mobile -->
+
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Link to your CSS file -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Schema.org Markup for a Website -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Telugu Movie Showcase",
+        "url": "YOUR_WEBSITE_URL_HERE", <!-- UPDATE THIS -->
+        "description": "Discover and watch a wide variety of Telugu movies. Search by title or filter by hero, year and sort.",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "YOUR_WEBSITE_URL_HERE#search-{search_term_string}", <!-- UPDATE THIS -->
+            "query-input": "required name=search_term_string"
+        }
+    }
+    </script>
+    <!-- Schema.org Markup for a Collection Page (more specific for this type of site) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "name": "Telugu Movie Collection - Discover, Filter & Watch Films",
+        "description": "A collection page showcasing various Telugu movies available for discovery. Search, filter, and find your favorite Telugu films.",
+        "url": "YOUR_WEBSITE_URL_HERE", <!-- UPDATE THIS -->
+        "mainEntity": {
+            "@type": "ItemList",
+            "name": "Telugu Movies List",
+            "description": "List of Telugu movies featured on this site."
+            // You could potentially list a few item @type: "Movie" here if you wanted to pre-populate some for SEO,
+            // but the dynamic loading handles the user experience.
+        }
+    }
+    </script>
+</head>
+
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo-area">
+                <a href="#" class="logo" id="logo-link" aria-label="Telugu Movie Showcase Homepage">
+                    <span class="logo-icon" aria-hidden="true">▶</span> <!-- Or use an <img> tag if you have a logo image -->
+                    <h1 class="logo-text">Telugu Movies</h1>
+                </a>
+                <button class="random-movie-btn" id="random-movie-btn" title="Pick a Random Movie">🎲 Random</button>
+            </div>
+
+            <div class="header-search-and-filters-wrapper">
+                <div class="header-search-area">
+                    <input type="search" id="search-input" placeholder="Search movies by title..."
+                        aria-label="Search Movies By Title">
+                </div>
+                <div class="header-filters custom-hero-select-wrapper" id="custom-hero-select-wrapper">
+                    <div class="custom-hero-select-trigger" id="custom-hero-select-trigger" tabindex="0" role="combobox"
+                        aria-haspopup="listbox" aria-expanded="false" aria-controls="hero-options-panel">
+                        <span class="selected-hero-name" id="selected-hero-name-display">All Hero Movies</span>
+                        <span class="arrow" aria-hidden="true">▼</span>
+                    </div>
+                    <div class="custom-hero-select-options" id="hero-options-panel" role="listbox" aria-hidden="true">
+                        <div class="hero-options-search-input-container">
+                            <input type="search" class="hero-options-search-input" id="hero-options-search-input"
+                                placeholder="Search hero..." aria-label="Search for a hero in the list">
+                        </div>
+                        <div class="hero-options-list-container" id="hero-options-list-container">
+                            <ul class="hero-options-list" id="hero-options-list" tabindex="-1"></ul>
+                        </div>
+                    </div>
+                    <input type="hidden" id="selected-hero-id-hidden" value="">
+                </div>
+                <div class="header-filters custom-year-select-wrapper" id="custom-year-select-wrapper">
+                    <div class="custom-year-select-trigger" id="custom-year-select-trigger" tabindex="0" role="combobox"
+                        aria-haspopup="listbox" aria-expanded="false" aria-controls="year-options-panel">
+                        <span class="selected-year-name" id="selected-year-name-display">Filter by Year</span>
+                        <span class="arrow" aria-hidden="true">▼</span>
+                    </div>
+                    <div class="custom-year-select-options" id="year-options-panel" role="listbox" aria-hidden="true">
+                        <div class="year-options-search-input-container">
+                            <input type="search" class="year-options-search-input" id="year-options-search-input"
+                                placeholder="Search year..." aria-label="Search for a year in the list">
+                        </div>
+                        <div class="year-options-list-container" id="year-options-list-container">
+                            <ul class="year-options-list" id="year-options-list" tabindex="-1"></ul>
+                        </div>
+                    </div>
+                    <input type="hidden" id="selected-year-hidden" value="">
+                </div>
+                <select id="sort-by-select" class="simple-filter-select" aria-label="Sort movies by">
+                    <option value="default">Default Order</option>
+                    <option value="title_asc">Title (A-Z)</option>
+                    <option value="title_desc">Title (Z-A)</option>
+                    <option value="year_desc">Newest First</option>
+                    <option value="year_asc">Oldest First</option>
+                </select>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero-section">
+        <div class="hero-content-wrapper">
+            <h2>Discover All Telugu Movies & Your Favourite Hero's Films in HD!</h2>
+            <p>Dive into the vibrant world of Telugu cinema. Search for timeless classics, the latest blockbusters, or
+                browse by your most beloved actors. High-Definition movie experiences are just a click away.</p>
+        </div>
+    </section>
+
+    <div class="ad-placeholder ad-placeholder-top">
+        <span>Top Banner Ad Placeholder (e.g., 728x90)</span>
+    </div>
+
+    <main>
+        <div id="movie-grid" class="movie-grid" aria-live="polite" aria-atomic="true">
+            <!-- Movie items will be injected here by JavaScript -->
+        </div>
+        <div id="loading-indicator">
+            <div class="spinner"></div>
+            Loading more movies...
+        </div>
+    </main>
+
+    <div class="ad-placeholder ad-placeholder-bottom">
+        <span>Bottom Banner Ad Placeholder (e.g., 728x90)</span>
+    </div>
+
+    <footer>
+        Telugu Movie Showcase © <span id="footer-year"></span>
+    </footer>
+
+    <!-- Link to your JavaScript file -->
+    <!-- 'defer' attribute ensures HTML is parsed before script execution, good practice -->
+    <script src="script.js" defer></script>
+</body>
+
+</html>
