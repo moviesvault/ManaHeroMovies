@@ -1,6 +1,3 @@
-/* style.css */
-
-/* ... (all your existing :root and universal reset styles from the top - KEEP THEM) ... */
 :root {
     --bg-primary: #ffffff;
     --bg-secondary: #f9f9f9;
@@ -42,7 +39,7 @@ header {
     background-color: var(--bg-secondary);
     position: sticky;
     top: 0;
-    z-index: 1000; /* Main header on top */
+    z-index: 1000; 
     box-shadow: var(--shadow-light);
     border-bottom: 1px solid var(--border-color);
     height: var(--header-height);
@@ -53,43 +50,55 @@ header {
 
 .header-content {
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */ /* Changed */
+    justify-content: flex-start;     /* Align items to the start */
     align-items: center;
     width: 100%;
-    max-width: 1600px;
-    margin: 0 auto;
-    gap: 15px; /* Increased gap slightly */
+    max-width: 1600px; /* Max width for overall header content */
+    margin: 0 auto;    /* Center header content block */
+    gap: 25px;         /* Adjust this for space between logo-area and search-wrapper */
 }
 
 .logo-area {
     display: flex;
     align-items: center;
-    gap: 15px;
-    flex-shrink: 0;
+    gap: 15px; /* Space between logo text and random button */
+    flex-shrink: 0; /* Prevent logo area from shrinking if space is tight */
 }
-/* ... (logo, logo-icon, logo-text, random-movie-btn styles remain the same) ... */
-.logo { display: flex; align-items: center; font-size: 1.5em; font-weight: 700; color: var(--text-primary); gap: 8px; text-decoration: none; transition: transform var(--transition-speed-fast) ease; }
+.logo { 
+    display: flex; align-items: center; font-size: 1.5em; font-weight: 700; 
+    color: var(--text-primary); gap: 8px; text-decoration: none; 
+    transition: transform var(--transition-speed-fast) ease; 
+}
 .logo:hover { transform: scale(1.05); }
 .logo-icon { color: var(--accent-primary); font-size: 1.3em; line-height: 1; }
 .logo-text { font-size: 0.9em; font-weight: inherit; margin: 0; padding: 0; line-height: normal; display: inline; }
-.random-movie-btn { background-color: var(--accent-primary); color: white; border: none; padding: 8px 12px; border-radius: 20px; font-size: 0.85em; cursor: pointer; font-weight: 500; transition: background-color var(--transition-speed-fast) ease; white-space: nowrap; margin-left: 35px; }
+
+.random-movie-btn { 
+    background-color: var(--accent-primary); color: white; border: none; 
+    padding: 8px 12px; border-radius: 20px; font-size: 0.85em; 
+    cursor: pointer; font-weight: 500; 
+    transition: background-color var(--transition-speed-fast) ease; 
+    white-space: nowrap; 
+    /* margin-left: 15px; /* Re-evaluate if needed with .logo-area gap */
+}
 .random-movie-btn:hover { background-color: var(--accent-secondary); }
 
 
-.header-main-search-wrapper { /* Renamed from .header-search-and-filters-wrapper */
-    flex-grow: 1;
-    max-width: 600px; /* Can be larger if desired */
-    margin: 0 auto; /* Center it if there's space */
+.header-main-search-wrapper {
+    flex-grow: 1; /* Allow this wrapper to consume remaining space */
     display: flex;
+    justify-content: center; /* Center the search area within this wrapper */
 }
 
-.header-search-area { /* Contains just the search input */
-    flex-grow: 1;
+.header-search-area {
     display: flex;
+    width: 100%; 
+    max-width: 550px; /* << ADJUST THIS: Max width of the search bar itself */
 }
 
 #search-input {
-    flex-grow: 1;
+    flex-grow: 1; 
     padding: 10px 15px;
     border: 1px solid var(--search-border-color);
     border-radius: 40px;
@@ -107,66 +116,50 @@ header {
 
 /* --- NEW: Filter Bar Styles --- */
 .filter-bar {
-    background-color: var(--bg-secondary); /* Same as header or slightly different */
+    background-color: var(--bg-secondary); 
     padding: 8px 15px;
     border-bottom: 1px solid var(--border-color);
     box-shadow: var(--shadow-light);
     position: sticky;
-    top: var(--header-height); /* Stick below the main header */
-    z-index: 999; /* Below main header but above content */
+    top: var(--header-height); 
+    z-index: 999; 
     display: flex;
-    justify-content: center; /* Center the content of the filter bar */
+    justify-content: center; 
 }
 
 .filter-bar-content {
     display: flex;
     align-items: center;
-    gap: 20px; /* Space between filter elements */
+    gap: 15px; /* INCREASED from 10px, adjust as needed */
     width: 100%;
-    max-width: 850px; /* Max width for the filter controls themselves */
-    flex-wrap: wrap; /* Allow filters to wrap on smaller screens */
-    justify-content: space-around; /* Distribute space when they don't fill width */
+    max-width: 850px; 
+    flex-wrap: wrap; 
+    justify-content: space-around; 
 }
 
-/* Styles for filter elements (dropdowns, select) - mostly unchanged from before */
-/* but now they are children of .filter-bar-content */
-.header-filters { /* This class is still used by custom-hero-select-wrapper and custom-year-select-wrapper */
+.header-filters { 
     flex-shrink: 0;
     min-width: 180px;
     position: relative;
-    flex-grow: 1; /* Allow them to take up space */
-    max-width: 280px; /* Prevent individual filters from becoming too wide */
+    flex-grow: 1; 
+    max-width: 280px; 
 }
 .custom-year-select-wrapper {
     min-width: 160px;
 }
 .simple-filter-select {
-    padding: 9px 12px;
-    border: 1px solid var(--search-border-color);
-    border-radius: 20px;
-    background-color: var(--search-input-bg);
-    color: var(--search-input-text);
-    font-size: 0.85em;
-    outline: none;
-    cursor: pointer;
-    min-width: 150px; /* Adjusted min-width */
-    height: 38px;
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
+    padding: 9px 12px; border: 1px solid var(--search-border-color); border-radius: 20px;
+    background-color: var(--search-input-bg); color: var(--search-input-text);
+    font-size: 0.85em; outline: none; cursor: pointer; min-width: 150px; 
+    height: 38px; appearance: none; -webkit-appearance: none; -moz-appearance: none;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%239aa0a6'%3E%3Cpath d='M8 11L3 6h10L8 11z'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 10px center;
-    background-size: 10px;
-    padding-right: 30px;
-    flex-grow: 1; /* Allow to take space */
-    max-width: 220px;
+    background-repeat: no-repeat; background-position: right 10px center; background-size: 10px;
+    padding-right: 30px; flex-grow: 1; max-width: 220px;
 }
 .simple-filter-select option { background-color: var(--search-input-bg); color: var(--search-input-text); }
 
-/* Custom Select Dropdowns (Hero and Year) - these styles are largely the same */
 .custom-hero-select-trigger,
-.custom-year-select-trigger { /* ... (keep existing styles for these triggers) ... */
+.custom-year-select-trigger { 
     background-color: var(--search-input-bg); color: var(--search-input-text); padding: 9px 12px; border: 1px solid var(--search-border-color); border-radius: 20px; font-size: 0.85em; cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; height: 38px;
 }
 .custom-hero-select-trigger .selected-hero-name,
@@ -177,7 +170,7 @@ header {
 .custom-year-select-trigger.open .arrow { transform: rotate(180deg); }
 
 .custom-hero-select-options,
-.custom-year-select-options { /* ... (keep existing styles for these option panels) ... */
+.custom-year-select-options { 
     position: absolute; top: calc(100% + 5px); left: 0; right: 0; background-color: var(--search-input-bg); border: 1px solid var(--search-border-color); border-radius: var(--border-radius-md); z-index: 1001; max-height: 280px; display: none; box-shadow: var(--shadow-medium); flex-direction: column;
 }
 .custom-hero-select-options.open,
@@ -201,9 +194,6 @@ header {
 .hero-options-list .no-hero-results,
 .year-options-list .no-year-results { padding: 10px 15px; color: var(--search-placeholder-text); font-style: italic; cursor: default; }
 
-
-/* ... (Hero Section, Ad Placeholder, Main, Movie Grid, Movie Item, etc. styles largely remain the same) ... */
-/* (Make sure no styles from these sections conflict with the new filter-bar) */
 .hero-section { background-color: var(--accent-primary); color: var(--bg-primary); padding: 40px 20px; text-align: center; }
 .hero-content-wrapper { max-width: 900px; margin: 0 auto; }
 .hero-section h2 { font-size: 2.2em; margin-bottom: 15px; font-weight: 700; line-height: 1.2; }
@@ -230,108 +220,114 @@ main { flex-grow: 1; padding: 25px 20px; width: 100%; max-width: 1600px; margin:
 footer { background-color: var(--bg-secondary); text-align: center; padding: 15px; font-size: 0.9em; color: var(--text-secondary); margin-top: auto; border-top: 1px solid var(--border-color); }
 
 
-/* --- Responsive Adjustments (MODIFIED for new header/filter bar structure) --- */
-
+/* --- Responsive Adjustments --- */
 @media (max-width: 992px) { /* Medium devices */
     .header-content {
-        /* Allow logo and search to potentially stack if screen is very narrow for a tablet */
         flex-wrap: wrap;
-        justify-content: center; /* Center logo/search if they stack */
+        justify-content: center; 
     }
     .logo-area {
-        /* If header content wraps, let logo take full width and center */
         width: 100%;
         justify-content: center;
-        margin-bottom: 10px; /* Space if search wraps below */
+        margin-bottom: 10px; 
     }
     .header-main-search-wrapper {
-        width: 100%; /* Allow search wrapper to take full width if it's below logo */
-        max-width: 700px; /* Cap its width */
+        width: 100%; 
+        max-width: 700px; 
+        order: 2; /* Make sure search comes after logo if it wraps */
+    }
+    .filter-bar {
+        /* Ensure filter bar is also full width if main header content stacks */
+        width: 100%;
+        top: auto; /* If header height becomes variable due to logo stacking above search */
+        position: static; /* Can make it static for simplicity at this breakpoint too */
+        box-shadow: var(--shadow-light); /* Keep shadow if still looks good */
+        border-top: 1px solid var(--border-color); /* Add separator if it stacks */
     }
     .filter-bar-content {
-        justify-content: space-around; /* Better distribution if not all fit */
+        justify-content: space-around; 
     }
     .header-filters, .simple-filter-select {
-        min-width: 160px; /* Adjust min width for filters */
+        min-width: 160px; 
         max-width: 250px;
+        flex-grow: 1; /* Allow them to take space if only 2 fit for example */
     }
 }
 
 @media (max-width: 768px) { /* Small devices */
     header {
         height: auto;
-        padding: 10px 15px;
+        padding: 10px 15px; 
     }
     .header-content {
-        flex-direction: column; /* Stack logo and search bar */
+        flex-direction: column; 
         gap: 10px;
     }
     .logo-area {
-        width: auto; /* Let logo size itself */
+        width: auto; 
         margin-bottom: 0;
+        order: 1; /* Explicitly ensure logo area is first */
     }
     .header-main-search-wrapper {
         width: 100%;
-        max-width: 500px; /* Control max width of search on mobile */
+        max-width: 500px; 
+        order: 2; /* Search wrapper second */
+        margin-top: 5px; /* Small space from logo area */
     }
     #search-input { padding: 10px 15px; }
 
     .filter-bar {
         padding: 10px;
-        top: auto; /* Unstick filter bar if header becomes auto height, or adjust 'top' if header height is predictable */
-        /* If header height is variable, making filter-bar non-sticky might be simpler,
-           OR dynamically calculate header height with JS to set 'top' for sticky filter bar.
-           For now, let's assume we might want it to scroll with content if header is auto.
-           If you want it sticky below a variable height header, that's more complex.
-           A simpler approach for now if header height becomes auto:
-        */
-        position: static; /* Make it part of normal flow */
-        box-shadow: none; /* Remove shadow if not sticky */
+        position: static; 
+        box-shadow: none;
+        border-top: 1px solid var(--border-color); /* Separator from header */
+        margin-top: 10px; /* Space from header elements */
     }
     .filter-bar-content {
-        flex-direction: column; /* Stack filters vertically */
+        flex-direction: column; 
         gap: 10px;
-        align-items: stretch; /* Make filters take full width */
+        align-items: stretch; 
     }
     .header-filters, .simple-filter-select,
     .custom-hero-select-wrapper, .custom-year-select-wrapper {
-        width: 100%; /* Filters take full width */
+        width: 100%; 
         min-width: 0;
-        max-width: none; /* Allow full width */
+        max-width: none; 
     }
     .custom-hero-select-trigger, .custom-year-select-trigger, .simple-filter-select {
         font-size: 0.9em;
         padding: 10px 15px;
     }
 
-    /* ... (other 768px styles like hero section, movie grid, etc. remain) ... */
     .hero-section { padding: 25px 15px; } .hero-section h2 { font-size: 1.8em; } .hero-section p { font-size: 1em; } .hero-bmc-button { font-size: 0.95em; padding: 11px 22px; } .ad-placeholder { margin: 20px auto; height: auto; min-height: 60px;} main { padding: 15px 10px; } .movie-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px 10px; }
 }
 
 @media (max-width: 480px) { /* Extra small devices */
+    .header-content { gap: 8px; }
     .logo { font-size: 1.3em; }
+    .header-main-search-wrapper { margin-top: 0; }
     #search-input, .custom-hero-select-trigger, .custom-year-select-trigger,
     .hero-options-search-input, .year-options-search-input, .simple-filter-select {
         padding: 9px 14px;
         font-size: 0.85em;
     }
+    .filter-bar { margin-top: 8px; }
     .hero-section h2 { font-size: 1.6em; }
     .hero-bmc-button { font-size: 0.9em; padding: 10px 20px; }
     .custom-hero-select-options, .custom-year-select-options { max-height: 180px; }
     #adblock-modal-content { max-width: 90%; padding: 15px; }
     #adblock-modal-title { font-size: 1.1em; }
     #adblock-modal-text { font-size: 0.85em; }
-    .movie-grid { grid-template-columns: 1fr; gap: 20px; } /* Ensures single column */
+    .movie-grid { grid-template-columns: 1fr; gap: 20px; } 
 }
 
 /* --- Buy Me A Coffee Button in Hero Section --- */
-.hero-bmc-button { /* ... (styles remain the same) ... */
+.hero-bmc-button { 
     display: inline-block; background-color: #FFDD00; color: #000000; padding: 12px 25px; border-radius: 25px; text-decoration: none; font-weight: bold; font-size: 1em; margin-top: 20px; transition: background-color 0.3s ease, transform 0.2s ease; box-shadow: 0 2px 5px rgba(0,0,0,0.15);
 }
 .hero-bmc-button:hover, .hero-bmc-button:focus { background-color: #fcc700; color: #000000; transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0,0,0,0.2); }
 
 /* --- Ad Blocker Detection Modal --- */
-/* ... (styles remain the same) ... */
 #adblock-modal-content { animation: fadeInModal 0.3s ease-out; }
 @keyframes fadeInModal { from { opacity: 0; transform: translateY(-20px) scale(0.95); } to { opacity: 1; transform: translateY(0) scale(1); } }
 #adblock-modal-title { color: var(--text-primary); margin-top: 0; font-size: 1.3em; }
