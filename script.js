@@ -1,11 +1,11 @@
 // script.js (Main website JavaScript)
 
 document.addEventListener('DOMContentLoaded', () => {
-    console.log("DOM fully loaded and parsed. Initializing script v12_adblock_fix_r3..."); // New version log
+    console.log("DOM fully loaded and parsed. Initializing script v12_adblock_fix_r2..."); // New version log
 
     // --- Constants ---
-    const MOVIES_STORAGE_KEY = 'teluguMovies_movies_v12_adblock_fix_r3'; 
-    const HEROES_STORAGE_KEY = 'teluguMovies_heroes_v12_adblock_fix_r3'; 
+    const MOVIES_STORAGE_KEY = 'teluguMovies_movies_v12_adblock_fix_r2'; 
+    const HEROES_STORAGE_KEY = 'teluguMovies_heroes_v12_adblock_fix_r2'; 
 
     const MOVIES_DATA_URL = 'https://mana-hero-movies.digimoviesvault.workers.dev/movies';
     const HEROES_DATA_URL = 'https://mana-hero-movies.digimoviesvault.workers.dev/heroes';
@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const HERO_SEARCH_DEBOUNCE_MS = 200;
     const YEAR_SEARCH_DEBOUNCE_MS = 350; 
 
-    // --- DOM Element References (Copied from your provided script.js) ---
+    // --- DOM Element References ---
     const movieGrid = document.getElementById('movie-grid');
     const searchInput = document.getElementById('search-input');
     const sortBySelect = document.getElementById('sort-by-select');
@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const yearOptionsList = document.getElementById('year-options-list');
     const selectedYearHidden = document.getElementById('selected-year-hidden');
 
-    // --- State Variables (Copied from your provided script.js) ---
+    // --- State Variables ---
     let allMovies = [];
     let allHeroes = [];
     let processedMovies = [];
@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const placeholderThumb = 'data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22320%22%20height%3D%22180%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20320%20180%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_1%20text%20%7B%20fill%3Argba(255%2C255%2C255%2C.75)%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A16pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_1%22%3E%3Crect%20width%3D%22320%22%20height%3D%22180%22%20fill%3D%22%23777%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22119%22%20y%3D%2297.5%22%3ENo%20Image%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E';
 
-    // --- Helper Functions (Copied from your provided script.js) ---
+    // --- Helper Functions ---
     function loadDataFromStorage(key, fallback = []) { /* ... same ... */ 
         try {
             const data = localStorage.getItem(key);
@@ -97,7 +97,8 @@ document.addEventListener('DOMContentLoaded', () => {
         return `https://i.ytimg.com/vi/${videoID}/${quality}.jpg`;
     }
 
-    // --- Custom Dropdown Functions (Hero & Year) (Copied from your provided script.js) ---
+    // --- Custom Dropdown Functions (Hero & Year) ---
+    // ... (All these functions remain the same as your provided script)
     function populateHeroOptions(heroesToList = allHeroes, searchTerm = '', currentSelectedId = '') { /* ... same ... */ 
         if (!heroOptionsList) return;
         heroOptionsList.innerHTML = '';
@@ -293,7 +294,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- Movie Display and Loading ---
-    // (All Movie Display functions remain the same as your provided script)
+    // ... (All Movie Display functions remain the same)
     function createMovieItemElement(movieData) { /* ... same ... */ 
         const movieElement = document.createElement('a');
         movieElement.className = 'movie-item';
@@ -424,7 +425,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // --- Application Initialization ---
-    // (Keep initializeApp as it was in your provided script)
+    // (Keep initializeApp as it was)
     async function initializeApp() { /* ... same as your provided script ... */ 
         console.log("initializeApp called");
         if (footerYear) footerYear.textContent = new Date().getFullYear();
@@ -547,71 +548,72 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Ad Blocker Detection (REFINED AND ROBUST VERSION) ---
     function detectAdBlocker() {
-        const adBait = document.getElementById('adBlockBait'); // Ensure this ID matches your HTML
+        const adBait = document.getElementById('ad-bait');
         const adBlockModal = document.getElementById('adblock-modal');
         const adBlockModalCloseBtn = document.getElementById('adblock-modal-close');
 
         if (!adBait || !adBlockModal || !adBlockModalCloseBtn) {
-            console.warn('Ad blocker detection elements (bait or modal) not found in HTML. Check IDs: adBlockBait, adblock-modal, adblock-modal-close.');
+            console.warn('Ad blocker detection elements not found in HTML.');
             return;
         }
 
         // Check if the modal was already dismissed in this session
         if (sessionStorage.getItem('adBlockModalDismissed') === 'true') {
             console.log('Ad block modal was already dismissed in this session. Not showing again.');
-            return; 
+            return; // Don't run detection or show modal if already dismissed
         }
 
-        let adBlockerDetected = false; // Changed from adBlockerSuspected for clarity
+        let adBlockerSuspected = false;
 
-        // Give a timeout for ad blockers to act and for the page to fully render
+        // Give a timeout for ad blockers to act and for the page to render
         setTimeout(() => {
-            console.log("Checking for ad blocker..."); // Log when check starts
-            if (document.body.contains(adBait)) { 
-                const baitStyle = window.getComputedStyle(adBait); 
-                console.log("Bait element computed styles:", `display: ${baitStyle.display}, visibility: ${baitStyle.visibility}, height: ${baitStyle.height}, offsetHeight: ${adBait.offsetHeight}, offsetParent: ${adBait.offsetParent}, opacity: ${baitStyle.opacity}`);
+            // Ensure the bait element is still part of the document
+            if (document.body.contains(adBait)) {
+                const baitStyle = window.getComputedStyle(adBait); // Get the actual computed style
 
-
+                // More robust checks
                 if (
                     baitStyle.display === 'none' ||
                     baitStyle.visibility === 'hidden' ||
-                    baitStyle.height === '0px' ||        
-                    parseInt(baitStyle.height, 10) === 0 || 
-                    adBait.offsetHeight === 0 ||           
-                    adBait.offsetParent === null ||      
-                    baitStyle.opacity === '0'           
+                    baitStyle.height === '0px' ||        // Explicitly check for '0px'
+                    parseInt(baitStyle.height, 10) === 0 || // Check numeric height
+                    adBait.offsetHeight === 0 ||           // Fallback check
+                    adBait.offsetParent === null ||      // Very good indicator if not in layout
+                    baitStyle.opacity === '0'            // Some blockers might just hide by opacity
                 ) {
-                    adBlockerDetected = true;
-                    console.log('Ad blocker DETECTED based on bait element style/dimensions.');
+                    adBlockerSuspected = true;
+                    console.log('Ad blocker suspected based on bait element style/dimensions.');
                 } else {
-                    adBlockerDetected = false;
-                    console.log('Bait element seems visible. No ad blocker detected by this check.');
+                    // This means the bait element is visible and has dimensions
+                    console.log('Bait element seems visible. No ad blocker suspected by this check.');
+                    adBlockerSuspected = false;
                 }
             } else {
-                adBlockerDetected = true; 
-                console.log('Ad blocker DETECTED (bait element removed from DOM).');
+                // If the bait element was removed from the DOM entirely, it's very likely an ad blocker
+                console.log('Ad blocker strongly suspected (bait element removed from DOM).');
+                adBlockerSuspected = true;
             }
 
-            if (adBlockerDetected) {
+            if (adBlockerSuspected) {
                 console.log('Displaying adblock modal.');
-                if (adBlockModal) adBlockModal.style.display = 'flex'; 
+                if (adBlockModal) adBlockModal.style.display = 'flex'; // Show the modal
             } else {
-                console.log('Final check: No ad blocker detected by current checks.');
+                console.log('Final check: No ad blocker detected (or bait not definitively blocked).');
             }
-        }, 3500); // Slightly increased timeout to 3.5 seconds
+        }, 3000); // Wait 3 seconds before checking. Adjust if needed.
 
         if (adBlockModalCloseBtn) {
             adBlockModalCloseBtn.addEventListener('click', () => {
-                if (adBlockModal) adBlockModal.style.display = 'none'; 
-                sessionStorage.setItem('adBlockModalDismissed', 'true'); 
+                if (adBlockModal) adBlockModal.style.display = 'none'; // Hide the modal
+                sessionStorage.setItem('adBlockModalDismissed', 'true'); // Remember dismissal for this session
                 console.log('Ad block modal dismissed by user for this session.');
             });
         }
         if (adBlockModal) {
             adBlockModal.addEventListener('click', (event) => {
-                if (event.target === adBlockModal) { 
+                if (event.target === adBlockModal) { // Only close if clicking on the overlay itself
                     adBlockModal.style.display = 'none';
-                    sessionStorage.setItem('adBlockModalDismissed', 'true'); 
+                    sessionStorage.setItem('adBlockModalDismissed', 'true'); // Remember dismissal
                     console.log('Ad block modal dismissed by clicking overlay for this session.');
                 }
             });
@@ -620,6 +622,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- End Ad Blocker Detection ---
 
     initializeApp();
-    detectAdBlocker(); 
+    detectAdBlocker(); // Call after app initialization
 
 }); // End of DOMContentLoaded
