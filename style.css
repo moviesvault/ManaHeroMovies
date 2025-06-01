@@ -64,7 +64,7 @@ header {
 .logo-area {
     display: flex;
     align-items: center;
-    gap: 30px;
+    gap: 15px;
     flex-shrink: 0;
 }
 /* ... (logo, logo-icon, logo-text, random-movie-btn styles remain the same) ... */
