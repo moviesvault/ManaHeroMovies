@@ -121,7 +121,7 @@ header {
 .filter-bar-content {
     display: flex;
     align-items: center;
-    gap: 15px; /* Space between filter elements */
+    gap: 20px; /* Space between filter elements */
     width: 100%;
     max-width: 850px; /* Max width for the filter controls themselves */
     flex-wrap: wrap; /* Allow filters to wrap on smaller screens */
