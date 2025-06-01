@@ -72,7 +72,7 @@ header {
 .logo:hover { transform: scale(1.05); }
 .logo-icon { color: var(--accent-primary); font-size: 1.3em; line-height: 1; }
 .logo-text { font-size: 0.9em; font-weight: inherit; margin: 0; padding: 0; line-height: normal; display: inline; }
-.random-movie-btn { background-color: var(--accent-primary); color: white; border: none; padding: 8px 12px; border-radius: 20px; font-size: 0.85em; cursor: pointer; font-weight: 500; transition: background-color var(--transition-speed-fast) ease; white-space: nowrap; margin-left: 25px; }
+.random-movie-btn { background-color: var(--accent-primary); color: white; border: none; padding: 8px 12px; border-radius: 20px; font-size: 0.85em; cursor: pointer; font-weight: 500; transition: background-color var(--transition-speed-fast) ease; white-space: nowrap; margin-left: 35px; }
 .random-movie-btn:hover { background-color: var(--accent-secondary); }
 
 
