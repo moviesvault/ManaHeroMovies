@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<!-- ... (your existing <head> section remains the same) ... -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,25 +11,25 @@
     <meta name="keywords"
         content="telugu movies, telugu films, watch telugu movies, manaheromovies, new telugu movies, telugu cinema, movie showcase, HD telugu movies">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://manaheromovies.pages.dev/"> <!-- UPDATE THIS with your actual website URL -->
+    <link rel="canonical" href="https://manaheromovies.pages.dev/">
 
     <!-- Open Graph / Facebook Meta Tags -->
-<!--     <meta property="og:title" content="Telugu Movie Showcase - Discover, Filter & Watch Films"> -->
-<!--     <meta property="og:description" -->
-<!--         content="Explore a vast collection of Telugu movies. Search, filter, sort, and discover new and classic Telugu films in HD."> -->
-<!--     <meta property="og:type" content="website"> -->
-<!--     <meta property="og:url" content="YOUR_WEBSITE_URL_HERE"> <!-- UPDATE THIS with your actual website URL -->
-<!--     <meta property="og:image" content="YOUR_DEFAULT_SOCIAL_IMAGE_URL_HERE"> <!-- UPDATE THIS with a default social image URL (e.g., your 512x512 icon or a banner) -->
-<!--     <meta property="og:site_name" content="Telugu Movie Showcase"> -->
+    <meta property="og:title" content="ManaHeroMovies - Telugu Movie Showcase">
+    <meta property="og:description"
+        content="Discover your favorite Telugu hero's movies! Search, filter, and explore a vast collection of Tollywood films on ManaHeroMovies.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://manaheromovies.pages.dev/">
+    <meta property="og:image" content="https://manaheromovies.pages.dev/assets/icons/android-chrome-512x512.png">
+    <meta property="og:site_name" content="ManaHeroMovies">
 
     <!-- Twitter Meta Tags -->
-<!--     <meta name="twitter:card" content="summary_large_image"> -->
-<!--     <meta name="twitter:title" content="Telugu Movie Showcase - Discover, Filter & Watch Films"> -->
-<!--     <meta name="twitter:description" -->
-<!--         content="Explore a vast collection of Telugu movies. Search, filter, sort, and discover new and classic Telugu films in HD."> -->
-<!--     <meta name="twitter:image" content="YOUR_DEFAULT_SOCIAL_IMAGE_URL_HERE"> <!-- UPDATE THIS with a default social image URL -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="ManaHeroMovies - Telugu Movie Showcase">
+    <meta name="twitter:description"
+        content="Discover your favorite Telugu hero's movies! Search, filter, and explore Tollywood films on ManaHeroMovies.">
+    <meta name="twitter:image" content="https://manaheromovies.pages.dev/assets/icons/android-chrome-512x512.png">
 
-    <!-- Favicons and Manifest (assuming they are in /assets/icons/ folder) -->
+    <!-- Favicons and Manifest -->
     <link rel="shortcut icon" href="/assets/icons/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/assets/icons/favicon.ico" type="image/x-icon">
     <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
@@ -37,35 +37,29 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="192x192" href="/assets/icons/android-chrome-192x192.png">
     <link rel="icon" type="image/png" sizes="512x512" href="/assets/icons/android-chrome-512x512.png">
-    <!-- <link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml"> --> <!-- Optional SVG -->
     <link rel="manifest" href="/assets/icons/site.webmanifest">
-    <meta name="theme-color" content="#ff0000"> <!-- Optional: Set a theme color for browser UI elements on mobile -->
+    <meta name="theme-color" content="#ff0000">
 
-
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 
-    <!-- Link to your CSS file -->
     <link rel="stylesheet" href="style.css">
 
-    <!-- Schema.org Markup for a Website -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "WebSite",
-        "name": "ManaHeroMovies - Telugu Movie Showcase", <!-- You can refine this name too -->
+        "name": "ManaHeroMovies - Telugu Movie Showcase",
         "url": "https://manaheromovies.pages.dev/",
-        "description": "Discover your favorite Telugu hero's movies! Search, filter by actor or year, and sort a vast collection of classic and new Tollywood films on ManaHeroMovies.", <!-- Match your meta description -->
+        "description": "Discover your favorite Telugu hero's movies! Search, filter by actor or year, and sort a vast collection of classic and new Tollywood films on ManaHeroMovies.",
         "potentialAction": {
             "@type": "SearchAction",
-            "target": "https://manaheromovies.pages.dev/", <!-- Points to your main page -->
+            "target": "https://manaheromovies.pages.dev/",
             "query-input": "required name=search_term_string"
         }
     }
     </script>
-    <!-- Schema.org Markup for a Collection Page (more specific for this type of site) -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -77,111 +71,126 @@
             "@type": "ItemList",
             "name": "Telugu Movies List on ManaHeroMovies",
             "description": "A dynamically updated list of Telugu movies available for browsing and discovery on ManaHeroMovies, featuring various actors and release years."
-            // As noted before, you could list a few static "Movie" items here,
-            // but it's not strictly necessary as your content is dynamic.
-            // Example of one static item (optional, and you'd need to keep it updated if you did this):
-            // "itemListElement": [
-            //   {
-            //     "@type": "ListItem",
-            //     "position": 1,
-            //     "item": {
-            //       "@type": "Movie",
-            //       "name": "A Sample Movie Title",
-            //       "url": "https://manaheromovies.pages.dev/#" // Link to the movie if you had individual movie pages or anchors
-            //     }
-            //   }
-            // ]
         }
     }
     </script>
 </head>
 
 <body>
+    <!-- Ad Blocker Detection Elements -->
+    <div id="ad-bait" class="ad-banner-example" style="height: 1px !important; width: 1px !important; position: absolute !important; left: -9999px !important; top: -9999px !important; visibility: hidden !important; pointer-events: none !important;">Advertisement</div>
+    <div id="adblock-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.7); z-index: 2000; justify-content: center; align-items: center; padding: 15px;">
+        <div id="adblock-modal-content" style="background-color: #fff; padding: 25px; border-radius: 8px; text-align: center; max-width: 450px; box-shadow: 0 5px 15px rgba(0,0,0,0.3);">
+            <h3 id="adblock-modal-title">Heads up! Ad Blocker Detected</h3>
+            <p id="adblock-modal-text" style="margin: 15px 0;">
+                ManaHeroMovies is supported by ads. To help us keep the content free and continue improving the site, please consider disabling your ad blocker for us or adding us to your whitelist.
+            </p>
+            <p style="margin-bottom: 20px; font-size: 0.9em;">Thank you for your support! ❤️</p>
+            <button id="adblock-modal-close" style="padding: 10px 20px; background-color: var(--accent-primary); color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">Okay, I understand</button>
+        </div>
+    </div>
+
     <header>
         <div class="header-content">
             <div class="logo-area">
                 <a href="#" class="logo" id="logo-link" aria-label="Telugu Movie Showcase Homepage">
-                    <span class="logo-icon" aria-hidden="true">▶</span> <!-- Or use an <img> tag if you have a logo image -->
+                    <span class="logo-icon" aria-hidden="true">▶</span>
                     <h1 class="logo-text">Telugu Movies</h1>
                 </a>
                 <button class="random-movie-btn" id="random-movie-btn" title="Pick a Random Movie">🎲 Random</button>
             </div>
 
-            <div class="header-search-and-filters-wrapper">
+            <!-- Main Search Bar now takes more space in the header -->
+            <div class="header-main-search-wrapper">
                 <div class="header-search-area">
-                    <input type="search" id="search-input" placeholder="Search movies by title..."
+                    <input type="search" id="search-input" placeholder="Search all movies by title..."
                         aria-label="Search Movies By Title">
                 </div>
-                <div class="header-filters custom-hero-select-wrapper" id="custom-hero-select-wrapper">
-                    <div class="custom-hero-select-trigger" id="custom-hero-select-trigger" tabindex="0" role="combobox"
-                        aria-haspopup="listbox" aria-expanded="false" aria-controls="hero-options-panel">
-                        <span class="selected-hero-name" id="selected-hero-name-display">All Hero Movies</span>
-                        <span class="arrow" aria-hidden="true">▼</span>
-                    </div>
-                    <div class="custom-hero-select-options" id="hero-options-panel" role="listbox" aria-hidden="true">
-                        <div class="hero-options-search-input-container">
-                            <input type="search" class="hero-options-search-input" id="hero-options-search-input"
-                                placeholder="Search hero..." aria-label="Search for a hero in the list">
-                        </div>
-                        <div class="hero-options-list-container" id="hero-options-list-container">
-                            <ul class="hero-options-list" id="hero-options-list" tabindex="-1"></ul>
-                        </div>
-                    </div>
-                    <input type="hidden" id="selected-hero-id-hidden" value="">
-                </div>
-                <div class="header-filters custom-year-select-wrapper" id="custom-year-select-wrapper">
-                    <div class="custom-year-select-trigger" id="custom-year-select-trigger" tabindex="0" role="combobox"
-                        aria-haspopup="listbox" aria-expanded="false" aria-controls="year-options-panel">
-                        <span class="selected-year-name" id="selected-year-name-display">Filter by Year</span>
-                        <span class="arrow" aria-hidden="true">▼</span>
-                    </div>
-                    <div class="custom-year-select-options" id="year-options-panel" role="listbox" aria-hidden="true">
-                        <div class="year-options-search-input-container">
-                            <input type="search" class="year-options-search-input" id="year-options-search-input"
-                                placeholder="Search year..." aria-label="Search for a year in the list">
-                        </div>
-                        <div class="year-options-list-container" id="year-options-list-container">
-                            <ul class="year-options-list" id="year-options-list" tabindex="-1"></ul>
-                        </div>
-                    </div>
-                    <input type="hidden" id="selected-year-hidden" value="">
-                </div>
-                <select id="sort-by-select" class="simple-filter-select" aria-label="Sort movies by">
-                    <option value="default">Default Order</option>
-                    <option value="title_asc">Title (A-Z)</option>
-                    <option value="title_desc">Title (Z-A)</option>
-                    <option value="year_desc">Newest First</option>
-                    <option value="year_asc">Oldest First</option>
-                </select>
             </div>
         </div>
     </header>
 
+    <!-- NEW: Filter Bar -->
+    <nav class="filter-bar">
+        <div class="filter-bar-content">
+            <div class="header-filters custom-hero-select-wrapper" id="custom-hero-select-wrapper">
+                <!-- Hero filter dropdown (same as before) -->
+                <div class="custom-hero-select-trigger" id="custom-hero-select-trigger" tabindex="0" role="combobox"
+                    aria-haspopup="listbox" aria-expanded="false" aria-controls="hero-options-panel">
+                    <span class="selected-hero-name" id="selected-hero-name-display">All Hero Movies</span>
+                    <span class="arrow" aria-hidden="true">▼</span>
+                </div>
+                <div class="custom-hero-select-options" id="hero-options-panel" role="listbox" aria-hidden="true">
+                    <div class="hero-options-search-input-container">
+                        <input type="search" class="hero-options-search-input" id="hero-options-search-input"
+                            placeholder="Search hero..." aria-label="Search for a hero in the list">
+                    </div>
+                    <div class="hero-options-list-container" id="hero-options-list-container">
+                        <ul class="hero-options-list" id="hero-options-list" tabindex="-1"></ul>
+                    </div>
+                </div>
+                <input type="hidden" id="selected-hero-id-hidden" value="">
+            </div>
+
+            <div class="header-filters custom-year-select-wrapper" id="custom-year-select-wrapper">
+                <!-- Year filter dropdown (same as before) -->
+                <div class="custom-year-select-trigger" id="custom-year-select-trigger" tabindex="0" role="combobox"
+                    aria-haspopup="listbox" aria-expanded="false" aria-controls="year-options-panel">
+                    <span class="selected-year-name" id="selected-year-name-display">Filter by Year</span>
+                    <span class="arrow" aria-hidden="true">▼</span>
+                </div>
+                <div class="custom-year-select-options" id="year-options-panel" role="listbox" aria-hidden="true">
+                    <div class="year-options-search-input-container">
+                        <input type="search" class="year-options-search-input" id="year-options-search-input"
+                            placeholder="Search year..." aria-label="Search for a year in the list">
+                    </div>
+                    <div class="year-options-list-container" id="year-options-list-container">
+                        <ul class="year-options-list" id="year-options-list" tabindex="-1"></ul>
+                    </div>
+                </div>
+                <input type="hidden" id="selected-year-hidden" value="">
+            </div>
+
+            <select id="sort-by-select" class="simple-filter-select" aria-label="Sort movies by">
+                <!-- Sort options (same as before) -->
+                <option value="default">Default Order</option>
+                <option value="title_asc">Title (A-Z)</option>
+                <option value="title_desc">Title (Z-A)</option>
+                <option value="year_desc">Newest First</option>
+                <option value="year_asc">Oldest First</option>
+            </select>
+        </div>
+    </nav>
+    <!-- END NEW: Filter Bar -->
+
     <section class="hero-section">
-        <div class="hero-content-wrapper">
+        <!-- ... your hero section content ... -->
+         <div class="hero-content-wrapper">
             <h2>Discover All Telugu Movies & Your Favourite Hero's Films in HD!</h2>
             <p>Dive into the vibrant world of Telugu cinema. Search for timeless classics, the latest blockbusters, or
                 browse by your most beloved actors. High-Definition movie experiences are just a click away.</p>
+            <a href="https://www.buymeacoffee.com/manaheromovies" target="_blank" rel="noopener noreferrer" class="hero-bmc-button">
+                ☕ Support ManaHeroMovies
+            </a>
         </div>
     </section>
 
-     <!--     Top Banner Ad Placeholder (e.g., 728x90) -->
+    <!-- ... (rest of your body: ad placeholders, main, footer, script tags) ... -->
     <div class="ad-placeholder ad-placeholder-top">
-         <script type="text/javascript">
-	atOptions = {
-		'key' : '155b6c1d6262fe0156b007984013d96c',
-		'format' : 'iframe',
-		'height' : 90,
-		'width' : 728,
-		'params' : {}
-	};
-</script>
-<script type="text/javascript" src="//earphonescharornament.com/155b6c1d6262fe0156b007984013d96c/invoke.js"></script>
+        <script type="text/javascript">
+            atOptions = {
+                'key' : '155b6c1d6262fe0156b007984013d96c',
+                'format' : 'iframe',
+                'height' : 90,
+                'width' : 728,
+                'params' : {}
+            };
+        </script>
+        <script type="text/javascript" src="//earphonescharornament.com/155b6c1d6262fe0156b007984013d96c/invoke.js"></script>
     </div>
 
     <main>
         <div id="movie-grid" class="movie-grid" aria-live="polite" aria-atomic="true">
-            <!-- Movie items will be injected here by JavaScript -->
         </div>
         <div id="loading-indicator">
             <div class="spinner"></div>
@@ -189,32 +198,26 @@
         </div>
     </main>
 
-     <!--       Bottom Banner Ad Placeholder (e.g., 728x90) -->
     <div class="ad-placeholder ad-placeholder-bottom">
-         <script type="text/javascript">
-	atOptions = {
-		'key' : '155b6c1d6262fe0156b007984013d96c',
-		'format' : 'iframe',
-		'height' : 90,
-		'width' : 728,
-		'params' : {}
-	};
-</script>
-<script type="text/javascript" src="//earphonescharornament.com/155b6c1d6262fe0156b007984013d96c/invoke.js"></script>
+        <script type="text/javascript">
+            atOptions = {
+                'key' : '155b6c1d6262fe0156b007984013d96c',
+                'format' : 'iframe',
+                'height' : 90,
+                'width' : 728,
+                'params' : {}
+            };
+        </script>
+        <script type="text/javascript" src="//earphonescharornament.com/155b6c1d6262fe0156b007984013d96c/invoke.js"></script>
     </div>
 
     <footer>
         Telugu Movie Showcase © <span id="footer-year"></span>
     </footer>
 
-    <!-- Link to your JavaScript file -->
-    <!-- 'defer' attribute ensures HTML is parsed before script execution, good practice -->
     <script src="script.js" defer></script>
 	
-<!-- 	<script type='text/javascript' src='//earphonescharornament.com/68/f5/29/68f529dd4aa5fd685942390944c3a976.js'></script> -->
-
-	<script async="async" data-cfasync="false" src="//earphonescharornament.com/f2a50ce572ef4c91c7746b59e3e1f282/invoke.js"></script>
-<div id="container-f2a50ce572ef4c91c7746b59e3e1f282"></div>
+    <script async="async" data-cfasync="false" src="//earphonescharornament.com/f2a50ce572ef4c91c7746b59e3e1f282/invoke.js"></script>
+    <div id="container-f2a50ce572ef4c91c7746b59e3e1f282"></div>
 </body>
-
 </html>
