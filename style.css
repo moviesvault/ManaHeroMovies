@@ -341,54 +341,52 @@ header {
     font-size: 1.1em;
     line-height: 1.6;
     color: #f0f0f0; /* Slightly off-white for softer look */
+    margin-bottom: 20px; /* Add margin below paragraph if button is present */
 }
 
 .ad-placeholder {
     width: 100%;
-    max-width: 728px; /* Common ad size */
-    height: 90px;     /* Common ad size */
+    max-width: 728px;
+    min-height: 90px;
     background-color: #e9e9e9;
     border: 1px dashed #cccccc;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 25px auto; /* Centered with space above/below */
+    margin: 25px auto;
     text-align: center;
     color: #777777;
     font-size: 0.9em;
     font-style: italic;
+    overflow: hidden;
 }
-.ad-placeholder span {
-    padding: 10px;
-}
-
 
 main {
-    flex-grow: 1; /* Ensures main content takes up available space */
+    flex-grow: 1;
     padding: 25px 20px;
     width: 100%;
-    max-width: 1600px; /* Max width for main content area */
-    margin: 0 auto; /* Center main content */
+    max-width: 1600px;
+    margin: 0 auto;
 }
 
 .movie-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 25px 15px; /* Row gap, Column gap */
+    gap: 25px 15px;
 }
 
 .movie-item {
-    background-color: transparent; /* Or var(--bg-primary) if needed */
+    background-color: transparent;
     border: none;
     cursor: pointer;
     display: flex;
     flex-direction: column;
     text-decoration: none;
     color: inherit;
-    opacity: 0; /* For fade-in animation */
-    transform: translateY(20px); /* For fade-in animation */
+    opacity: 0;
+    transform: translateY(20px);
     animation: fadeInItem var(--transition-speed-medium) ease-out forwards;
-    position: relative; /* For highlight pseudo-element */
+    position: relative;
 }
 
 .movie-item.highlighted::after {
@@ -396,10 +394,10 @@ main {
     position: absolute;
     top: -5px; left: -5px; right: -5px; bottom: -5px;
     border: 3px solid var(--accent-primary);
-    border-radius: var(--border-radius-lg); /* Match thumbnail or slightly larger */
+    border-radius: var(--border-radius-lg);
     animation: pulseHighlight 1.5s ease-out;
-    pointer-events: none; /* So it doesn't interfere with clicks */
-    z-index: 6; /* Above thumbnail hover effect */
+    pointer-events: none;
+    z-index: 6;
 }
 
 @keyframes pulseHighlight {
@@ -408,13 +406,10 @@ main {
     100% { opacity: 0; transform: scale(1.05); }
 }
 
-
-/* Staggered animation delays for initial items */
 .movie-item:nth-child(1) { animation-delay: 0.05s; }
 .movie-item:nth-child(2) { animation-delay: 0.1s; }
 .movie-item:nth-child(3) { animation-delay: 0.15s; }
 .movie-item:nth-child(4) { animation-delay: 0.2s; }
-/* Add more if needed, or handle programmatically for many items */
 
 @keyframes fadeInItem {
     to {
@@ -426,51 +421,51 @@ main {
 .thumbnail-container {
     position: relative;
     width: 100%;
-    aspect-ratio: 16 / 9; /* Common video aspect ratio */
+    aspect-ratio: 16 / 9;
     border-radius: var(--border-radius-lg);
-    overflow: hidden; /* Ensures image corners match border-radius */
+    overflow: hidden;
     margin-bottom: 12px;
-    background-color: #e0e0e0; /* Placeholder background */
+    background-color: #e0e0e0;
     transition: box-shadow var(--transition-speed-fast) ease, transform var(--transition-speed-fast) ease, border-radius var(--transition-speed-fast) ease;
 }
 
 .movie-item:hover .thumbnail-container {
-    border-radius: 0; /* Optional: remove radius on hover for a sharper look */
-    transform: scale(1.03); /* Slight zoom effect */
+    border-radius: 0;
+    transform: scale(1.03);
     box-shadow: var(--shadow-medium);
-    z-index: 5; /* Bring to front on hover */
+    z-index: 5;
 }
 
 .movie-thumbnail {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Ensures image covers container without distortion */
-    display: block; /* Removes extra space below image */
-    border-radius: inherit; /* Inherit border-radius from container */
-    transition: border-radius var(--transition-speed-fast) ease; /* Smooth transition for border-radius change on hover */
+    object-fit: cover;
+    display: block;
+    border-radius: inherit;
+    transition: border-radius var(--transition-speed-fast) ease;
 }
 
 .movie-details {
-    padding: 0 5px; /* Small padding around text */
+    padding: 0 5px;
 }
 
 .movie-title {
-    font-size: 1rem; /* Standard size for movie titles */
+    font-size: 1rem;
     font-weight: 500;
     color: var(--text-primary);
     margin-bottom: 6px;
-    display: -webkit-box; /* For multi-line ellipsis */
-    -webkit-line-clamp: 2; /* Limit to 2 lines */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
-    line-height: 1.4; /* Adjust for proper line height within 2 lines */
-    max-height: calc(1.4em * 2); /* Fallback for max-height to contain 2 lines */
+    line-height: 1.4;
+    max-height: calc(1.4em * 2);
     transition: color var(--transition-speed-fast) ease;
 }
 
 .movie-item:hover .movie-title {
-    color: var(--accent-primary); /* Change title color on hover */
+    color: var(--accent-primary);
 }
 
 #loading-indicator {
@@ -478,15 +473,15 @@ main {
     padding: 30px 0;
     font-size: 1.1em;
     color: var(--text-secondary);
-    display: none; /* Hidden by default */
+    display: none;
     width: 100%;
     margin-top: 20px;
-    opacity: 0; /* For smooth appearance */
+    opacity: 0;
     transition: opacity var(--transition-speed-medium) ease;
 }
 
 #loading-indicator.visible {
-    display: flex; /* Use flex for centering spinner and text */
+    display: flex;
     flex-direction: column;
     align-items: center;
     opacity: 1;
@@ -497,8 +492,8 @@ main {
     width: 36px;
     height: 36px;
     border-radius: 50%;
-    border-left-color: var(--accent-primary); /* Spinner color */
-    margin: 0 auto 10px auto; /* Center spinner and add margin below */
+    border-left-color: var(--accent-primary);
+    margin: 0 auto 10px auto;
     animation: spin 1s linear infinite;
 }
 
@@ -512,10 +507,10 @@ main {
     padding: 40px 20px;
     font-size: 1.2em;
     color: var(--text-secondary);
-    width: 100%; /* Ensure it takes full width */
-    grid-column: 1 / -1; /* Span all columns in grid */
+    width: 100%;
+    grid-column: 1 / -1;
     opacity: 0;
-    animation: fadeInItem 0.5s ease-out forwards; /* Reuse fade-in animation */
+    animation: fadeInItem 0.5s ease-out forwards;
 }
 
 footer {
@@ -524,99 +519,177 @@ footer {
     padding: 15px;
     font-size: 0.9em;
     color: var(--text-secondary);
-    margin-top: auto; /* Pushes footer to bottom if content is short */
+    margin-top: auto;
     border-top: 1px solid var(--border-color);
 }
 
-/* Responsive Adjustments */
+/* --- Responsive Adjustments (NEW, more detailed) --- */
 @media (max-width: 992px) { /* Medium devices (tablets, smaller desktops) */
+    .header-content {
+        flex-wrap: wrap; 
+        justify-content: center; 
+    }
+    .logo-area {
+        width: 100%; 
+        justify-content: center; 
+        margin-bottom: 10px; 
+    }
     .header-search-and-filters-wrapper {
-        flex-wrap: wrap; /* Allow items to wrap */
-        gap: 5px;
-        max-width: none; /* Take full available width */
+        flex-wrap: wrap; 
+        justify-content: center; 
+        gap: 8px; 
+        max-width: none; 
+        width: 100%; 
     }
     .header-search-area {
-        width: 100%; /* Search takes full width on its own row */
-        margin-bottom: 5px;
+        width: 100%; 
+        min-width: 280px; 
+        margin-bottom: 8px; 
     }
     .header-filters, .simple-filter-select {
-        min-width: 120px; /* Adjust min-width for smaller screens */
-        flex-grow: 1; /* Allow filters to grow and fill space */
+        min-width: 150px; 
+        flex-grow: 1;    
+        width: auto;     
     }
-    .custom-hero-select-wrapper { /* Can use .header-filters if common styling applies */
-        min-width: 150px;
+    .custom-hero-select-wrapper,
+    .custom-year-select-wrapper {
+        min-width: 150px; 
+        flex-grow: 1;
     }
 }
 
 @media (max-width: 768px) { /* Small devices (landscape phones, large portrait phones) */
     header {
-        height: auto; /* Allow header to grow if content wraps */
-        padding: 10px;
+        height: auto; 
+        padding: 10px 15px; 
     }
     .header-content {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 10px;
+        flex-direction: column; 
+        align-items: center; 
+        gap: 15px; 
     }
     .logo-area {
-        width: 100%;
-        justify-content: center;
-        margin-bottom: 10px;
-        order: 1; /* Logo area first */
+        width: auto; 
+        margin-bottom: 0; 
+        order: 1; 
     }
     .random-movie-btn {
-        font-size: 0.8em;
-        padding: 6px 10px;
+        font-size: 0.85em; 
+        padding: 7px 11px;
     }
     .header-search-and-filters-wrapper {
-        order: 2; /* Search and filters second */
-        width: 100%;
-        flex-direction: column; /* Stack search and filters vertically */
+        order: 2;
+        width: 100%; 
+        max-width: 500px; 
+        margin-left: auto;
+        margin-right: auto;
+        flex-direction: column; 
         gap: 10px;
-        margin-top: 0; /* Reset margin */
+        margin-top: 0;
     }
     .header-search-area {
-        width: 100%;
-        margin-bottom: 0;
+        width: 100%; 
+        margin-bottom: 0; 
     }
     #search-input {
-        font-size: 0.9em; /* Maintain readability */
-        padding: 8px 15px;
+        font-size: 0.9em;
+        padding: 10px 15px; 
     }
     .header-filters, .simple-filter-select,
     .custom-hero-select-wrapper, .custom-year-select-wrapper {
-        width: 100%; /* Filters take full width */
-        min-width: 0; /* Reset min-width */
-        flex-grow: 0; /* Don't grow, take 100% width */
+        width: 100%; 
+        min-width: 0; 
+        flex-grow: 0; 
     }
     .custom-hero-select-trigger, .custom-year-select-trigger, .simple-filter-select {
         font-size: 0.9em;
-        padding: 8px 15px; /* Consistent padding */
+        padding: 10px 15px; 
     }
 
     .hero-section { padding: 25px 15px; }
     .hero-section h2 { font-size: 1.8em; }
     .hero-section p { font-size: 1em; }
-    .ad-placeholder { margin: 20px auto; height: auto; /* Allow height to adjust */ min-height: 60px;}
+    .hero-bmc-button { font-size: 0.95em; padding: 11px 22px; } 
+    .ad-placeholder { margin: 20px auto; height: auto; min-height: 60px;}
     main { padding: 15px 10px; }
     .movie-grid {
-        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); /* Slightly smaller minmax for movie items */
-        gap: 20px 12px;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); 
+        gap: 20px 10px; 
     }
 }
 
 @media (max-width: 480px) { /* Extra small devices (portrait phones) */
-    .logo { font-size: 1.3em; /* Slightly smaller logo */ }
+    .logo { font-size: 1.3em; }
+    .header-content {
+        gap: 10px; 
+    }
+    .header-search-and-filters-wrapper {
+        max-width: 100%; 
+    }
     .movie-grid {
-        grid-template-columns: 1fr; /* Single column layout for movies */
-        gap: 20px; /* Only row gap needed */
+        grid-template-columns: 1fr; 
+        gap: 20px;
     }
     #search-input, .custom-hero-select-trigger, .custom-year-select-trigger,
     .hero-options-search-input, .year-options-search-input, .simple-filter-select {
-        padding: 8px 12px; /* Adjust padding for smaller inputs */
+        padding: 9px 14px; 
+        font-size: 0.85em; 
     }
     .hero-section h2 { font-size: 1.6em; }
+    .hero-bmc-button { font-size: 0.9em; padding: 10px 20px; }
     .custom-hero-select-options, .custom-year-select-options {
-        max-height: 200px; /* Reduce max height of dropdowns */
+        max-height: 180px; 
     }
+    #adblock-modal-content { max-width: 90%; padding: 15px; } 
+    #adblock-modal-title { font-size: 1.1em; }
+    #adblock-modal-text { font-size: 0.85em; }
+}
+
+/* --- Buy Me A Coffee Button in Hero Section --- */
+.hero-bmc-button {
+    display: inline-block;
+    background-color: #FFDD00; /* Classic BMC yellow */
+    color: #000000; /* Black text */
+    padding: 12px 25px;
+    border-radius: 25px; /* Pill shape */
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1em;
+    margin-top: 20px; /* Space above the button in hero */
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+}
+
+.hero-bmc-button:hover,
+.hero-bmc-button:focus {
+    background-color: #fcc700; /* Slightly darker yellow */
+    color: #000000;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* --- Ad Blocker Detection Modal --- */
+#adblock-modal-content {
+    animation: fadeInModal 0.3s ease-out;
+}
+
+@keyframes fadeInModal {
+    from { opacity: 0; transform: translateY(-20px) scale(0.95); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+#adblock-modal-title {
+    color: var(--text-primary);
+    margin-top: 0;
+    font-size: 1.3em;
+}
+
+#adblock-modal-text {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    font-size: 1em;
+}
+
+#adblock-modal-close:hover {
+    background-color: var(--accent-secondary);
 }
