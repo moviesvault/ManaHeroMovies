@@ -56,13 +56,13 @@ header {
     width: 100%;
     max-width: 1600px; /* Max width for overall header content */
     margin: 0 auto;    /* Center header content block */
-    gap: 25px;         /* Adjust this for space between logo-area and search-wrapper */
+    gap: 15px;         /* Adjust this for space between logo-area and search-wrapper */
 }
 
 .logo-area {
     display: flex;
     align-items: center;
-    gap: 15px; /* Space between logo text and random button */
+    gap: 25px; /* Space between logo text and random button */
     flex-shrink: 0; /* Prevent logo area from shrinking if space is tight */
 }
 .logo { 
