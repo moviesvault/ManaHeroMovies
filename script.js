@@ -4,8 +4,8 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log("DOM fully loaded and parsed. Initializing script...");
 
     // --- Constants ---
-    const MOVIES_STORAGE_KEY = 'teluguMovies_movies_v11_liveYearFilter_r1'; // Updated key
-    const HEROES_STORAGE_KEY = 'teluguMovies_heroes_v11_liveYearFilter_r1'; // Updated key
+    const MOVIES_STORAGE_KEY = 'teluguMovies_movies_v11_liveYearFilter_r1'; // Or a new version like v12
+    const HEROES_STORAGE_KEY = 'teluguMovies_heroes_v11_liveYearFilter_r1'; // Or a new version like v12
 
     const MOVIES_DATA_URL = 'https://mana-hero-movies.digimoviesvault.workers.dev/movies';
     const HEROES_DATA_URL = 'https://mana-hero-movies.digimoviesvault.workers.dev/heroes';
@@ -14,11 +14,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const SCROLL_THRESHOLD = 300;
     const SEARCH_DEBOUNCE_MS = 350;
     const LOAD_MORE_DELAY_MS = 50;
-    const HERO_SEARCH_DEBOUNCE_MS = 200; // For dropdown list filtering
-    const YEAR_SEARCH_DEBOUNCE_MS = 350; // For live main grid filtering (can be same as SEARCH_DEBOUNCE_MS)
+    const HERO_SEARCH_DEBOUNCE_MS = 200;
+    const YEAR_SEARCH_DEBOUNCE_MS = 350;
 
     // --- DOM Element References ---
-    // (Keep all your DOM element references as they were)
     const movieGrid = document.getElementById('movie-grid');
     const searchInput = document.getElementById('search-input');
     const sortBySelect = document.getElementById('sort-by-select');
@@ -41,9 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const yearOptionsList = document.getElementById('year-options-list');
     const selectedYearHidden = document.getElementById('selected-year-hidden');
 
-
     // --- State Variables ---
-    // (Keep all your state variables as they were)
     let allMovies = [];
     let allHeroes = [];
     let processedMovies = [];
@@ -51,9 +48,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentPage = 1;
     let isLoading = false;
     let searchTimeout;
-    let heroSearchTimeout; // For hero dropdown list filtering
-    let yearFilterTimeout; // For year live grid filtering
-
+    let heroSearchTimeout;
+    let yearFilterTimeout;
     let currentFocusedHeroOptionIndex = -1;
     let currentFocusedYearOptionIndex = -1;
     let allAvailableYears = [];
@@ -61,8 +57,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const placeholderThumb = 'data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22320%22%20height%3D%22180%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20320%20180%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_1%20text%20%7B%20fill%3Argba(255%2C255%2C255%2C.75)%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A16pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_1%22%3E%3Crect%20width%3D%22320%22%20height%3D%22180%22%20fill%3D%22%23777%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22119%22%20y%3D%2297.5%22%3ENo%20Image%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E';
 
     // --- Helper Functions ---
-    // (Keep loadDataFromStorage, processMovieData, normalizeSearchString)
-    // (Keep getYouTubeVideoID, getYouTubeThumbnailUrl)
     function loadDataFromStorage(key, fallback = []) {
         try {
             const data = localStorage.getItem(key);
@@ -108,9 +102,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- Custom Hero Select Functions ---
-    // (Keep populateHeroOptions, selectHeroOption, toggleHeroOptionsPanel, closeHeroOptionsPanel, updateFocusedHeroOption)
-    // The hero search input will only filter the dropdown list itself.
     function populateHeroOptions(heroesToList = allHeroes, searchTerm = '', currentSelectedId = '') {
+        // ... (This function remains the same as the last version)
         if (!heroOptionsList) return;
         heroOptionsList.innerHTML = '';
         const normalizedSearchTerm = normalizeSearchString(searchTerm);
@@ -149,17 +142,19 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
      function selectHeroOption(optionElement) {
+        // ... (This function remains the same)
         const heroId = optionElement.dataset.value;
         const heroName = optionElement.textContent;
         selectedHeroNameDisplay.textContent = heroName;
-        selectedHeroIdHidden.value = heroId; // This value is used by resetAndLoadMovies
-        heroOptionsSearchInput.value = ''; // Clear search in dropdown
+        selectedHeroIdHidden.value = heroId; 
+        heroOptionsSearchInput.value = ''; 
         heroOptionsList.querySelectorAll('li.selected-option').forEach(li => li.classList.remove('selected-option'));
         optionElement.classList.add('selected-option');
         closeHeroOptionsPanel();
-        resetAndLoadMovies(); // Filter main grid
+        resetAndLoadMovies(); 
     }
     function toggleHeroOptionsPanel() {
+        // ... (This function remains the same)
         const isOpen = heroOptionsPanel.classList.toggle('open');
         heroSelectTrigger.classList.toggle('open', isOpen);
         heroSelectTrigger.setAttribute('aria-expanded', String(isOpen));
@@ -177,6 +172,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
     function closeHeroOptionsPanel() {
+        // ... (This function remains the same)
         if (heroOptionsPanel.classList.contains('open')) {
             heroOptionsPanel.classList.remove('open');
             heroSelectTrigger.classList.remove('open');
@@ -185,6 +181,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
     function updateFocusedHeroOption(scroll = true) {
+        // ... (This function remains the same)
         const options = Array.from(heroOptionsList.children).filter(li => !li.classList.contains('no-hero-results'));
         if (options.length === 0) return;
         currentFocusedHeroOptionIndex = Math.max(0, Math.min(currentFocusedHeroOptionIndex, options.length - 1));
@@ -203,6 +200,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- Custom Year Select Functions ---
+    // ... (All Year Select functions remain the same as the last version where year filter was live)
     function populateAllAvailableYears(moviesArray) {
         if (!Array.isArray(moviesArray)) return;
         const years = [...new Set(moviesArray.map(movie => movie.year).filter(year => year > 0))]
@@ -220,13 +218,9 @@ document.addEventListener('DOMContentLoaded', () => {
         allYearsOption.textContent = "All Years";
         allYearsOption.dataset.value = "";
         allYearsOption.setAttribute('role', 'option');
-        // For live typing, we don't set selected-option here based on currentSelectedValue from typed text
-        // Only highlight if it was a previously *clicked* selection.
         if (selectedYearHidden.value === "" && currentSelectedValue === "") allYearsOption.classList.add('selected-option');
-
         allYearsOption.addEventListener('click', () => selectYearOption(allYearsOption));
         yearOptionsList.appendChild(allYearsOption);
-
         if (filteredYears.length > 0) {
             filteredYears.forEach(year => {
                 const option = document.createElement('li');
@@ -244,13 +238,11 @@ document.addEventListener('DOMContentLoaded', () => {
             yearOptionsList.appendChild(noResultsLi);
         }
         if (yearOptionsPanel.classList.contains('open')) {
-             // Focus logic needs to consider typed value vs selected value
             const focusedVal = yearOptionsSearchInput.value.trim() || selectedYearHidden.value;
             currentFocusedYearOptionIndex = Array.from(yearOptionsList.children)
                 .findIndex(li => li.dataset.value === focusedVal && !li.classList.contains('no-year-results'));
-
             if (currentFocusedYearOptionIndex === -1 && yearOptionsList.children.length > 0 && !yearOptionsList.querySelector('.no-year-results')) {
-                currentFocusedYearOptionIndex = 0; // Default to first item if no match
+                currentFocusedYearOptionIndex = 0;
             }
             updateFocusedYearOption(false);
         }
@@ -258,13 +250,13 @@ document.addEventListener('DOMContentLoaded', () => {
     function selectYearOption(optionElement) {
         const yearValue = optionElement.dataset.value;
         const yearName = optionElement.textContent;
-        selectedYearHidden.value = yearValue; // This value is used by resetAndLoadMovies
+        selectedYearHidden.value = yearValue;
         selectedYearNameDisplay.textContent = yearName;
-        yearOptionsSearchInput.value = yearValue; // Sync search input with selection
+        yearOptionsSearchInput.value = yearValue;
         yearOptionsList.querySelectorAll('li.selected-option').forEach(li => li.classList.remove('selected-option'));
         optionElement.classList.add('selected-option');
         closeYearOptionsPanel();
-        resetAndLoadMovies(); // Filter main grid
+        resetAndLoadMovies();
     }
     function toggleYearOptionsPanel() {
         const isOpen = yearOptionsPanel.classList.toggle('open');
@@ -273,7 +265,6 @@ document.addEventListener('DOMContentLoaded', () => {
         yearOptionsPanel.setAttribute('aria-hidden', String(!isOpen));
         if (isOpen) {
             closeHeroOptionsPanel();
-            // Don't clear yearOptionsSearchInput.value here, let user see what they might have typed
             populateYearOptions(allAvailableYears, yearOptionsSearchInput.value, selectedYearHidden.value);
             yearOptionsSearchInput.focus();
             let focusIndex = Array.from(yearOptionsList.children).findIndex(li => li.classList.contains('selected-option') || li.dataset.value === selectedYearHidden.value);
@@ -306,16 +297,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 opt.setAttribute('aria-selected', 'true');
                 if (!opt.id) opt.id = `year-option-${idx}`;
                 yearOptionsList.setAttribute('aria-activedescendant', opt.id);
-                if (scroll) { opt.scrollIntoView({ block: 'nearest', inline: 'nearest' }); }
+                if (scroll) { opt.scrollIntoView({ block: 'nearest', inline: 'nearest' });}
             } else {
                 opt.removeAttribute('aria-selected');
             }
         });
     }
 
+
     // --- Movie Display and Loading ---
-    // (createMovieItemElement, displayMovies, showLoadingIndicator, loadMoreMovies, resetAndLoadMovies, handleRandomMovie are largely the same)
-    // (Make sure resetAndLoadMovies correctly uses selectedHeroIdHidden.value and selectedYearHidden.value)
+    // ... (All Movie Display functions remain the same as the last version)
     function createMovieItemElement(movieData) {
         const movieElement = document.createElement('a');
         movieElement.className = 'movie-item';
@@ -376,20 +367,16 @@ document.addEventListener('DOMContentLoaded', () => {
         }, LOAD_MORE_DELAY_MS);
     }
     function resetAndLoadMovies() {
-        // This function is now the central point for applying all filters
         console.log("resetAndLoadMovies called");
         const currentSearchTerm = searchInput.value;
-        const heroIdFromFilter = selectedHeroIdHidden.value; // From hero dropdown selection
-        const yearFromFilter = selectedYearHidden.value;   // From year dropdown selection OR live typing
+        const heroIdFromFilter = selectedHeroIdHidden.value;
+        const yearFromFilter = selectedYearHidden.value;
         const sortBy = sortBySelect.value;
-
         if (!movieGrid) { console.error("Movie grid not found!"); return; }
         movieGrid.innerHTML = ''; currentPage = 1; isLoading = false; showLoadingIndicator(false);
         
         console.log("Filtering with processedMovies:", processedMovies.length, "movies");
         let moviesToConsider = [...processedMovies];
-
-        // Apply Hero Filter (based on selected ID)
         if (heroIdFromFilter) {
             moviesToConsider = moviesToConsider.filter(movie => String(movie.heroId) === String(heroIdFromFilter));
             const hero = allHeroes.find(h => String(h.id) === String(heroIdFromFilter));
@@ -397,19 +384,13 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             if (searchInput) searchInput.placeholder = "Search all movies by title...";
         }
-
-        // Apply Year Filter (based on selected/typed year)
-        if (yearFromFilter) { // This will use the value from selectedYearHidden, updated by live typing
+        if (yearFromFilter) {
             moviesToConsider = moviesToConsider.filter(movie => String(movie.year).startsWith(String(yearFromFilter)));
         }
-
-        // Apply Search Term Filter (main search box)
         const lowerSearchTerm = currentSearchTerm.toLowerCase().trim();
         if (lowerSearchTerm) {
             moviesToConsider = moviesToConsider.filter(movie => movie.title && movie.title.toLowerCase().includes(lowerSearchTerm));
         }
-
-        // Apply Sorting
         switch (sortBy) {
             case 'title_asc': moviesToConsider.sort((a, b) => (a.title || "").localeCompare(b.title || "")); break;
             case 'title_desc': moviesToConsider.sort((a, b) => (b.title || "").localeCompare(a.title || "")); break;
@@ -440,8 +421,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-
     // --- Scroll Handling ---
+    // (Keep throttledScrollHandler)
     let scrollTimeout;
     const throttledScrollHandler = () => {
         if (scrollTimeout) return;
@@ -456,9 +437,8 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // --- Application Initialization ---
+    // (Keep initializeApp as it was in the last full version)
     async function initializeApp() {
-        // (Keep the initializeApp function mostly as it was, ensuring it calls processMovieData,
-        // populateAllAvailableYears, and the first resetAndLoadMovies)
         console.log("initializeApp called");
         if (footerYear) footerYear.textContent = new Date().getFullYear();
         let fetchedMovies = []; let fetchedHeroes = []; let fetchError = false;
@@ -496,7 +476,7 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log("Total heroes:", allHeroes.length);
         selectedHeroIdHidden.value = ""; selectedHeroNameDisplay.textContent = "All Hero Movies";
         selectedYearHidden.value = ""; selectedYearNameDisplay.textContent = "Filter by Year";
-        yearOptionsSearchInput.value = ""; // Clear year search input on init
+        yearOptionsSearchInput.value = ""; 
         if (processedMovies.length === 0 || allHeroes.length === 0) {
             if (movieGrid) movieGrid.innerHTML = '<p class="no-results">No movies or essential hero data could be loaded. Please check your internet connection or try again later.</p>';
             [searchInput, heroSelectTrigger, yearSelectTrigger, sortBySelect, randomMovieBtn].forEach(el => { if (el) { if (el.tagName === 'INPUT' || el.tagName === 'SELECT') el.disabled = true; else el.style.pointerEvents = 'none'; }});
@@ -526,40 +506,35 @@ document.addEventListener('DOMContentLoaded', () => {
         // Year Select Input Listener (MODIFIED for live filtering of main grid)
         if (yearOptionsSearchInput) {
             yearOptionsSearchInput.addEventListener('input', () => {
-                clearTimeout(yearFilterTimeout); // Use a different timeout for this
+                clearTimeout(yearFilterTimeout); 
                 const typedText = yearOptionsSearchInput.value.trim();
-                
-                // Update the dropdown list based on typed text
-                populateYearOptions(allAvailableYears, typedText, selectedYearHidden.value);
-                
-                // Update the hidden input and display text immediately
-                selectedYearHidden.value = typedText;
-                selectedYearNameDisplay.textContent = typedText === "" ? "Filter by Year" : typedText;
+                populateYearOptions(allAvailableYears, typedText, selectedYearHidden.value); // Still filter dropdown
+                selectedYearHidden.value = typedText; // Update hidden value with typed text
+                selectedYearNameDisplay.textContent = typedText === "" ? "Filter by Year" : typedText; // Update display name
 
-                // Debounce the main movie grid update
                 yearFilterTimeout = setTimeout(() => {
-                    resetAndLoadMovies(); // This will now use the live typedText from selectedYearHidden
+                    resetAndLoadMovies(); // Trigger main grid filter
                 }, YEAR_SEARCH_DEBOUNCE_MS);
             });
             yearOptionsSearchInput.addEventListener('keydown', (e) => { 
                 if (e.key === 'Escape') { 
                     e.stopPropagation(); 
-                    // If escaping, and text was typed, revert to last actual selection or "All Years"
-                    if (yearOptionsSearchInput.value !== selectedYearHidden.value && yearOptionsSearchInput.value !== "") {
-                        const previouslySelectedYear = allHeroes.find(h => h.id === selectedYearHidden.value);
-                        yearOptionsSearchInput.value = selectedYearHidden.value; // Revert input display
-                        selectedYearNameDisplay.textContent = selectedYearHidden.value ? (previouslySelectedYear ? previouslySelectedYear.name : selectedYearHidden.value) : "Filter by Year";
-                    }
+                    const previouslySelectedYearValue = selectedYearHidden.value; // Original value before typing might be different
+                    // To revert properly, we need to know what was *truly* selected before typing started.
+                    // For now, let's just clear the input and keep the current selectedYearHidden value.
+                    yearOptionsSearchInput.value = selectedYearHidden.value; // Revert input to the *actually selected* year
+                    selectedYearNameDisplay.textContent = selectedYearHidden.value ? selectedYearHidden.value : "Filter by Year";
+                    populateYearOptions(allAvailableYears, selectedYearHidden.value, selectedYearHidden.value); // Repopulate with original selection
                     closeYearOptionsPanel(); 
                     yearSelectTrigger.focus(); 
                 } else if (e.key === 'Enter') { 
                     e.preventDefault(); 
-                    clearTimeout(yearFilterTimeout); // Prevent duplicate resetAndLoad
+                    clearTimeout(yearFilterTimeout); 
                     const options = Array.from(yearOptionsList.children).filter(li => !li.classList.contains('no-year-results')); 
                     if (currentFocusedYearOptionIndex >= 0 && currentFocusedYearOptionIndex < options.length) { 
                         options[currentFocusedYearOptionIndex].click(); 
-                    } else { // If no specific option is focused via keyboard, apply the typed text
-                        selectedYearHidden.value = yearOptionsSearchInput.value.trim();
+                    } else { 
+                        selectedYearHidden.value = yearOptionsSearchInput.value.trim(); // Apply typed text
                         selectedYearNameDisplay.textContent = selectedYearHidden.value === "" ? "Filter by Year" : selectedYearHidden.value;
                         closeYearOptionsPanel();
                         resetAndLoadMovies();
@@ -578,7 +553,6 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        // --- (Keep other event listeners: heroSelectTrigger, heroOptionsList, yearSelectTrigger, yearOptionsList, document click, window scroll) ---
         if (heroSelectTrigger) { heroSelectTrigger.addEventListener('click', toggleHeroOptionsPanel); heroSelectTrigger.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleHeroOptionsPanel(); } else if (e.key === 'Escape') { closeHeroOptionsPanel(); heroSelectTrigger.focus(); }}); }
         if (heroOptionsList) { heroOptionsList.addEventListener('keydown', (e) => { const options = Array.from(heroOptionsList.children).filter(li => !li.classList.contains('no-hero-results')); if (!options.length) return; let newIndex = currentFocusedHeroOptionIndex; if (e.key === 'ArrowDown') { e.preventDefault(); newIndex = (currentFocusedHeroOptionIndex + 1) % options.length; } else if (e.key === 'ArrowUp') { e.preventDefault(); newIndex = (currentFocusedHeroOptionIndex - 1 + options.length) % options.length; } else if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); if (newIndex >= 0 && newIndex < options.length) { options[newIndex].click(); } return; } else if (e.key === 'Escape') { closeHeroOptionsPanel(); heroSelectTrigger.focus(); return; } else if (e.key === 'Home') { e.preventDefault(); newIndex = 0; } else if (e.key === 'End') { e.preventDefault(); newIndex = options.length - 1; } else if (e.key.length === 1 && e.key.match(/[a-z0-9]/i)) { heroOptionsSearchInput.focus(); return; } if (newIndex !== currentFocusedHeroOptionIndex) { currentFocusedHeroOptionIndex = newIndex; updateFocusedHeroOption(); } }); }
         if (yearSelectTrigger) { yearSelectTrigger.addEventListener('click', toggleYearOptionsPanel); yearSelectTrigger.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleYearOptionsPanel(); } else if (e.key === 'Escape') { closeYearOptionsPanel(); yearSelectTrigger.focus(); }}); }
@@ -589,9 +563,8 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log("initializeApp finished.");
     }
 
-    // --- Ad Blocker Detection (from previous implementation) ---
+    // --- Ad Blocker Detection (MODIFIED FOR BETTER RELIABILITY) ---
     function detectAdBlocker() {
-        // (Keep the detectAdBlocker function as it was)
         const adBait = document.getElementById('ad-bait');
         const adBlockModal = document.getElementById('adblock-modal');
         const adBlockModalCloseBtn = document.getElementById('adblock-modal-close');
@@ -600,31 +573,53 @@ document.addEventListener('DOMContentLoaded', () => {
             console.warn('Ad blocker detection elements not found in HTML.');
             return;
         }
+
+        let adBlockerSuspected = false; // Flag to manage detection
+
         setTimeout(() => {
-            const baitStyle = getComputedStyle(adBait);
-            if (
-                adBait.offsetHeight === 0 ||
-                adBait.offsetParent === null ||
-                baitStyle.display === 'none' ||
-                baitStyle.visibility === 'hidden' ||
-                baitStyle.opacity === '0'
-            ) {
-                console.log('Ad blocker detected (or bait element hidden).');
-                if (adBlockModal) adBlockModal.style.display = 'flex';
+            if (document.body.contains(adBait)) {
+                const baitStyle = window.getComputedStyle(adBait);
+                if (
+                    baitStyle.display === 'none' ||
+                    baitStyle.visibility === 'hidden' ||
+                    baitStyle.height === '0px' ||
+                    parseInt(baitStyle.height, 10) === 0 ||
+                    adBait.offsetHeight === 0 ||
+                    adBait.offsetParent === null ||
+                    baitStyle.opacity === '0'
+                ) {
+                    adBlockerSuspected = true;
+                } else {
+                    adBlockerSuspected = false;
+                }
+            } else {
+                adBlockerSuspected = true; // Bait removed from DOM
+            }
+
+            if (adBlockerSuspected) {
+                // Check if modal was already dismissed in this session
+                if (sessionStorage.getItem('adBlockModalDismissed') !== 'true') {
+                    console.log('Ad blocker suspected. Displaying modal.');
+                    if (adBlockModal) adBlockModal.style.display = 'flex';
+                } else {
+                    console.log('Ad blocker suspected, but modal was already dismissed this session.');
+                }
             } else {
                 console.log('No ad blocker detected (or bait not blocked).');
             }
-        }, 2500);
+        }, 3000); // Increased timeout to 3 seconds
 
         if (adBlockModalCloseBtn) {
             adBlockModalCloseBtn.addEventListener('click', () => {
                 if (adBlockModal) adBlockModal.style.display = 'none';
+                sessionStorage.setItem('adBlockModalDismissed', 'true'); // Remember dismissal for this session
             });
         }
         if (adBlockModal) {
             adBlockModal.addEventListener('click', (event) => {
                 if (event.target === adBlockModal) {
                     adBlockModal.style.display = 'none';
+                    sessionStorage.setItem('adBlockModalDismissed', 'true'); // Remember dismissal
                 }
             });
         }
@@ -632,6 +627,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- End Ad Blocker Detection ---
 
     initializeApp();
-    detectAdBlocker(); // Call after app initialization
+    detectAdBlocker();
 
 }); // End of DOMContentLoaded
