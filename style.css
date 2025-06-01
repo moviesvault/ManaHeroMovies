@@ -64,7 +64,7 @@ header {
 .logo-area {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 20px;
     flex-shrink: 0;
 }
 /* ... (logo, logo-icon, logo-text, random-movie-btn styles remain the same) ... */
@@ -121,7 +121,7 @@ header {
 .filter-bar-content {
     display: flex;
     align-items: center;
-    gap: 10px; /* Space between filter elements */
+    gap: 15px; /* Space between filter elements */
     width: 100%;
     max-width: 850px; /* Max width for the filter controls themselves */
     flex-wrap: wrap; /* Allow filters to wrap on smaller screens */
