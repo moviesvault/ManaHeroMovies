@@ -1,11 +1,11 @@
 // script.js (Main website JavaScript)
 
 document.addEventListener('DOMContentLoaded', () => {
-    console.log("DOM fully loaded and parsed. Initializing script...");
+    console.log("DOM fully loaded and parsed. Initializing script v12_adblock_fix_r3..."); // New version log
 
     // --- Constants ---
-    const MOVIES_STORAGE_KEY = 'teluguMovies_movies_v11_liveYearFilter_r1'; // Or a new version like v12
-    const HEROES_STORAGE_KEY = 'teluguMovies_heroes_v11_liveYearFilter_r1'; // Or a new version like v12
+    const MOVIES_STORAGE_KEY = 'teluguMovies_movies_v12_adblock_fix_r3'; 
+    const HEROES_STORAGE_KEY = 'teluguMovies_heroes_v12_adblock_fix_r3'; 
 
     const MOVIES_DATA_URL = 'https://mana-hero-movies.digimoviesvault.workers.dev/movies';
     const HEROES_DATA_URL = 'https://mana-hero-movies.digimoviesvault.workers.dev/heroes';
@@ -15,9 +15,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const SEARCH_DEBOUNCE_MS = 350;
     const LOAD_MORE_DELAY_MS = 50;
     const HERO_SEARCH_DEBOUNCE_MS = 200;
-    const YEAR_SEARCH_DEBOUNCE_MS = 350;
+    const YEAR_SEARCH_DEBOUNCE_MS = 350; 
 
-    // --- DOM Element References ---
+    // --- DOM Element References (Copied from your provided script.js) ---
     const movieGrid = document.getElementById('movie-grid');
     const searchInput = document.getElementById('search-input');
     const sortBySelect = document.getElementById('sort-by-select');
@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const yearOptionsList = document.getElementById('year-options-list');
     const selectedYearHidden = document.getElementById('selected-year-hidden');
 
-    // --- State Variables ---
+    // --- State Variables (Copied from your provided script.js) ---
     let allMovies = [];
     let allHeroes = [];
     let processedMovies = [];
@@ -48,16 +48,16 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentPage = 1;
     let isLoading = false;
     let searchTimeout;
-    let heroSearchTimeout;
-    let yearFilterTimeout;
+    let heroSearchTimeout; 
+    let yearFilterTimeout; 
     let currentFocusedHeroOptionIndex = -1;
     let currentFocusedYearOptionIndex = -1;
     let allAvailableYears = [];
 
     const placeholderThumb = 'data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22320%22%20height%3D%22180%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20320%20180%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_1%20text%20%7B%20fill%3Argba(255%2C255%2C255%2C.75)%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A16pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_1%22%3E%3Crect%20width%3D%22320%22%20height%3D%22180%22%20fill%3D%22%23777%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22119%22%20y%3D%2297.5%22%3ENo%20Image%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E';
 
-    // --- Helper Functions ---
-    function loadDataFromStorage(key, fallback = []) {
+    // --- Helper Functions (Copied from your provided script.js) ---
+    function loadDataFromStorage(key, fallback = []) { /* ... same ... */ 
         try {
             const data = localStorage.getItem(key);
             if (data) {
@@ -71,8 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return fallback;
         }
     }
-
-    function processMovieData(moviesArray) {
+    function processMovieData(moviesArray) { /* ... same ... */
         if (!Array.isArray(moviesArray)) return [];
         return moviesArray.map(movie => ({
             id: movie.id || `movie-${Date.now()}-${Math.random().toString(36).substring(2, 11)}`,
@@ -83,27 +82,23 @@ document.addEventListener('DOMContentLoaded', () => {
             year: movie.year ? parseInt(movie.year, 10) : 0
         })).filter(movie => movie.redirectUrl); 
     }
-
-    function normalizeSearchString(str) {
+    function normalizeSearchString(str) { /* ... same ... */ 
         if (typeof str !== 'string') return '';
         return str.toLowerCase().replace(/[\s.]+/g, '');
     }
-
-    function getYouTubeVideoID(url) {
+    function getYouTubeVideoID(url) { /* ... same ... */ 
         if (!url) return null;
         const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
         const match = url.match(regExp);
         return (match && match[2].length === 11) ? match[2] : null;
     }
-
-    function getYouTubeThumbnailUrl(videoID, quality = 'mqdefault') {
+    function getYouTubeThumbnailUrl(videoID, quality = 'mqdefault') { /* ... same ... */ 
         if (!videoID) return null;
         return `https://i.ytimg.com/vi/${videoID}/${quality}.jpg`;
     }
 
-    // --- Custom Hero Select Functions ---
-    function populateHeroOptions(heroesToList = allHeroes, searchTerm = '', currentSelectedId = '') {
-        // ... (This function remains the same as the last version)
+    // --- Custom Dropdown Functions (Hero & Year) (Copied from your provided script.js) ---
+    function populateHeroOptions(heroesToList = allHeroes, searchTerm = '', currentSelectedId = '') { /* ... same ... */ 
         if (!heroOptionsList) return;
         heroOptionsList.innerHTML = '';
         const normalizedSearchTerm = normalizeSearchString(searchTerm);
@@ -141,8 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
             updateFocusedHeroOption(false);
         }
     }
-     function selectHeroOption(optionElement) {
-        // ... (This function remains the same)
+    function selectHeroOption(optionElement) { /* ... same ... */ 
         const heroId = optionElement.dataset.value;
         const heroName = optionElement.textContent;
         selectedHeroNameDisplay.textContent = heroName;
@@ -153,8 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
         closeHeroOptionsPanel();
         resetAndLoadMovies(); 
     }
-    function toggleHeroOptionsPanel() {
-        // ... (This function remains the same)
+    function toggleHeroOptionsPanel() { /* ... same ... */ 
         const isOpen = heroOptionsPanel.classList.toggle('open');
         heroSelectTrigger.classList.toggle('open', isOpen);
         heroSelectTrigger.setAttribute('aria-expanded', String(isOpen));
@@ -171,8 +164,7 @@ document.addEventListener('DOMContentLoaded', () => {
             updateFocusedHeroOption(false);
         }
     }
-    function closeHeroOptionsPanel() {
-        // ... (This function remains the same)
+    function closeHeroOptionsPanel() { /* ... same ... */ 
         if (heroOptionsPanel.classList.contains('open')) {
             heroOptionsPanel.classList.remove('open');
             heroSelectTrigger.classList.remove('open');
@@ -180,8 +172,7 @@ document.addEventListener('DOMContentLoaded', () => {
             heroOptionsPanel.setAttribute('aria-hidden', 'true');
         }
     }
-    function updateFocusedHeroOption(scroll = true) {
-        // ... (This function remains the same)
+    function updateFocusedHeroOption(scroll = true) { /* ... same ... */ 
         const options = Array.from(heroOptionsList.children).filter(li => !li.classList.contains('no-hero-results'));
         if (options.length === 0) return;
         currentFocusedHeroOptionIndex = Math.max(0, Math.min(currentFocusedHeroOptionIndex, options.length - 1));
@@ -198,16 +189,13 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
-
-    // --- Custom Year Select Functions ---
-    // ... (All Year Select functions remain the same as the last version where year filter was live)
-    function populateAllAvailableYears(moviesArray) {
+    function populateAllAvailableYears(moviesArray) { /* ... same ... */ 
         if (!Array.isArray(moviesArray)) return;
         const years = [...new Set(moviesArray.map(movie => movie.year).filter(year => year > 0))]
             .sort((a, b) => b - a);
         allAvailableYears = years.map(String);
     }
-    function populateYearOptions(yearsToList = allAvailableYears, searchTerm = '', currentSelectedValue = '') {
+    function populateYearOptions(yearsToList = allAvailableYears, searchTerm = '', currentSelectedValue = '') { /* ... same ... */ 
         if (!yearOptionsList) return;
         yearOptionsList.innerHTML = '';
         const normalizedSearchTerm = String(searchTerm).toLowerCase().trim();
@@ -247,7 +235,7 @@ document.addEventListener('DOMContentLoaded', () => {
             updateFocusedYearOption(false);
         }
     }
-    function selectYearOption(optionElement) {
+    function selectYearOption(optionElement) { /* ... same ... */ 
         const yearValue = optionElement.dataset.value;
         const yearName = optionElement.textContent;
         selectedYearHidden.value = yearValue;
@@ -258,7 +246,7 @@ document.addEventListener('DOMContentLoaded', () => {
         closeYearOptionsPanel();
         resetAndLoadMovies();
     }
-    function toggleYearOptionsPanel() {
+    function toggleYearOptionsPanel() { /* ... same ... */ 
         const isOpen = yearOptionsPanel.classList.toggle('open');
         yearSelectTrigger.classList.toggle('open', isOpen);
         yearSelectTrigger.setAttribute('aria-expanded', String(isOpen));
@@ -278,7 +266,7 @@ document.addEventListener('DOMContentLoaded', () => {
             updateFocusedYearOption(false);
         }
     }
-    function closeYearOptionsPanel() {
+    function closeYearOptionsPanel() { /* ... same ... */ 
         if (yearOptionsPanel.classList.contains('open')) {
             yearOptionsPanel.classList.remove('open');
             yearSelectTrigger.classList.remove('open');
@@ -286,7 +274,7 @@ document.addEventListener('DOMContentLoaded', () => {
             yearOptionsPanel.setAttribute('aria-hidden', 'true');
         }
     }
-    function updateFocusedYearOption(scroll = true) {
+    function updateFocusedYearOption(scroll = true) { /* ... same ... */ 
         const options = Array.from(yearOptionsList.children).filter(li => !li.classList.contains('no-year-results'));
         if (options.length === 0) return;
         currentFocusedYearOptionIndex = Math.max(0, Math.min(currentFocusedYearOptionIndex, options.length - 1));
@@ -304,10 +292,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-
     // --- Movie Display and Loading ---
-    // ... (All Movie Display functions remain the same as the last version)
-    function createMovieItemElement(movieData) {
+    // (All Movie Display functions remain the same as your provided script)
+    function createMovieItemElement(movieData) { /* ... same ... */ 
         const movieElement = document.createElement('a');
         movieElement.className = 'movie-item';
         movieElement.href = movieData.redirectUrl || '#';
@@ -341,17 +328,17 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>`;
         return movieElement;
     }
-    function displayMovies(moviesToDisplay) {
+    function displayMovies(moviesToDisplay) { /* ... same ... */ 
         if (!movieGrid || !Array.isArray(moviesToDisplay)) return;
         const fragment = document.createDocumentFragment();
         moviesToDisplay.forEach(movie => fragment.appendChild(createMovieItemElement(movie)));
         movieGrid.appendChild(fragment);
     }
-    function showLoadingIndicator(show) {
+    function showLoadingIndicator(show) { /* ... same ... */ 
         if (!loadingIndicator) return;
         loadingIndicator.classList.toggle('visible', show);
     }
-    function loadMoreMovies() {
+    function loadMoreMovies() { /* ... same ... */ 
         if (isLoading || !currentFilteredMovies || currentFilteredMovies.length === 0) return;
         const startIndex = (currentPage - 1) * MOVIES_PER_PAGE;
         if (startIndex >= currentFilteredMovies.length) {
@@ -366,7 +353,7 @@ document.addEventListener('DOMContentLoaded', () => {
             showLoadingIndicator((currentPage - 1) * MOVIES_PER_PAGE < currentFilteredMovies.length);
         }, LOAD_MORE_DELAY_MS);
     }
-    function resetAndLoadMovies() {
+    function resetAndLoadMovies() { /* ... same ... */ 
         console.log("resetAndLoadMovies called");
         const currentSearchTerm = searchInput.value;
         const heroIdFromFilter = selectedHeroIdHidden.value;
@@ -405,7 +392,7 @@ document.addEventListener('DOMContentLoaded', () => {
             loadMoreMovies();
         }
     }
-    function handleRandomMovie() {
+    function handleRandomMovie() { /* ... same ... */ 
         if (!randomMovieBtn || !currentFilteredMovies || currentFilteredMovies.length === 0) return;
         const randomIndex = Math.floor(Math.random() * currentFilteredMovies.length);
         const randomMovie = currentFilteredMovies[randomIndex];
@@ -424,7 +411,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Scroll Handling ---
     // (Keep throttledScrollHandler)
     let scrollTimeout;
-    const throttledScrollHandler = () => {
+    const throttledScrollHandler = () => { /* ... same ... */ 
         if (scrollTimeout) return;
         scrollTimeout = setTimeout(() => {
             if (!isLoading && (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - SCROLL_THRESHOLD)) {
@@ -437,8 +424,8 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // --- Application Initialization ---
-    // (Keep initializeApp as it was in the last full version)
-    async function initializeApp() {
+    // (Keep initializeApp as it was in your provided script)
+    async function initializeApp() { /* ... same as your provided script ... */ 
         console.log("initializeApp called");
         if (footerYear) footerYear.textContent = new Date().getFullYear();
         let fetchedMovies = []; let fetchedHeroes = []; let fetchError = false;
@@ -492,7 +479,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (sortBySelect) { sortBySelect.addEventListener('change', resetAndLoadMovies); }
         if (randomMovieBtn) { randomMovieBtn.addEventListener('click', handleRandomMovie); }
         
-        // Hero Select Input Listener (filters dropdown list only)
         if (heroOptionsSearchInput) {
             heroOptionsSearchInput.addEventListener('input', () => {
                 clearTimeout(heroSearchTimeout);
@@ -503,28 +489,23 @@ document.addEventListener('DOMContentLoaded', () => {
             heroOptionsSearchInput.addEventListener('keydown', (e) => { if (e.key === 'Escape') { e.stopPropagation(); closeHeroOptionsPanel(); heroSelectTrigger.focus(); } else if (e.key === 'ArrowDown') { e.preventDefault(); const firstValidOption = heroOptionsList.querySelector('li:not(.no-hero-results)'); if (firstValidOption) { heroOptionsList.focus(); currentFocusedHeroOptionIndex = Array.from(heroOptionsList.children).indexOf(firstValidOption); updateFocusedHeroOption(); } } });
         }
         
-        // Year Select Input Listener (MODIFIED for live filtering of main grid)
         if (yearOptionsSearchInput) {
             yearOptionsSearchInput.addEventListener('input', () => {
                 clearTimeout(yearFilterTimeout); 
                 const typedText = yearOptionsSearchInput.value.trim();
-                populateYearOptions(allAvailableYears, typedText, selectedYearHidden.value); // Still filter dropdown
-                selectedYearHidden.value = typedText; // Update hidden value with typed text
-                selectedYearNameDisplay.textContent = typedText === "" ? "Filter by Year" : typedText; // Update display name
-
+                populateYearOptions(allAvailableYears, typedText, selectedYearHidden.value); 
+                selectedYearHidden.value = typedText; 
+                selectedYearNameDisplay.textContent = typedText === "" ? "Filter by Year" : typedText; 
                 yearFilterTimeout = setTimeout(() => {
-                    resetAndLoadMovies(); // Trigger main grid filter
+                    resetAndLoadMovies(); 
                 }, YEAR_SEARCH_DEBOUNCE_MS);
             });
             yearOptionsSearchInput.addEventListener('keydown', (e) => { 
                 if (e.key === 'Escape') { 
                     e.stopPropagation(); 
-                    const previouslySelectedYearValue = selectedYearHidden.value; // Original value before typing might be different
-                    // To revert properly, we need to know what was *truly* selected before typing started.
-                    // For now, let's just clear the input and keep the current selectedYearHidden value.
-                    yearOptionsSearchInput.value = selectedYearHidden.value; // Revert input to the *actually selected* year
+                    yearOptionsSearchInput.value = selectedYearHidden.value; 
                     selectedYearNameDisplay.textContent = selectedYearHidden.value ? selectedYearHidden.value : "Filter by Year";
-                    populateYearOptions(allAvailableYears, selectedYearHidden.value, selectedYearHidden.value); // Repopulate with original selection
+                    populateYearOptions(allAvailableYears, selectedYearHidden.value, selectedYearHidden.value); 
                     closeYearOptionsPanel(); 
                     yearSelectTrigger.focus(); 
                 } else if (e.key === 'Enter') { 
@@ -534,7 +515,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (currentFocusedYearOptionIndex >= 0 && currentFocusedYearOptionIndex < options.length) { 
                         options[currentFocusedYearOptionIndex].click(); 
                     } else { 
-                        selectedYearHidden.value = yearOptionsSearchInput.value.trim(); // Apply typed text
+                        selectedYearHidden.value = yearOptionsSearchInput.value.trim(); 
                         selectedYearNameDisplay.textContent = selectedYearHidden.value === "" ? "Filter by Year" : selectedYearHidden.value;
                         closeYearOptionsPanel();
                         resetAndLoadMovies();
@@ -563,63 +544,75 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log("initializeApp finished.");
     }
 
-    // --- Ad Blocker Detection (MODIFIED FOR BETTER RELIABILITY) ---
+
+    // --- Ad Blocker Detection (REFINED AND ROBUST VERSION) ---
     function detectAdBlocker() {
-        const adBait = document.getElementById('ad-bait');
+        const adBait = document.getElementById('adBlockBait'); // Ensure this ID matches your HTML
         const adBlockModal = document.getElementById('adblock-modal');
         const adBlockModalCloseBtn = document.getElementById('adblock-modal-close');
 
         if (!adBait || !adBlockModal || !adBlockModalCloseBtn) {
-            console.warn('Ad blocker detection elements not found in HTML.');
+            console.warn('Ad blocker detection elements (bait or modal) not found in HTML. Check IDs: adBlockBait, adblock-modal, adblock-modal-close.');
             return;
         }
 
-        let adBlockerSuspected = false; // Flag to manage detection
+        // Check if the modal was already dismissed in this session
+        if (sessionStorage.getItem('adBlockModalDismissed') === 'true') {
+            console.log('Ad block modal was already dismissed in this session. Not showing again.');
+            return; 
+        }
 
+        let adBlockerDetected = false; // Changed from adBlockerSuspected for clarity
+
+        // Give a timeout for ad blockers to act and for the page to fully render
         setTimeout(() => {
-            if (document.body.contains(adBait)) {
-                const baitStyle = window.getComputedStyle(adBait);
+            console.log("Checking for ad blocker..."); // Log when check starts
+            if (document.body.contains(adBait)) { 
+                const baitStyle = window.getComputedStyle(adBait); 
+                console.log("Bait element computed styles:", `display: ${baitStyle.display}, visibility: ${baitStyle.visibility}, height: ${baitStyle.height}, offsetHeight: ${adBait.offsetHeight}, offsetParent: ${adBait.offsetParent}, opacity: ${baitStyle.opacity}`);
+
+
                 if (
                     baitStyle.display === 'none' ||
                     baitStyle.visibility === 'hidden' ||
-                    baitStyle.height === '0px' ||
-                    parseInt(baitStyle.height, 10) === 0 ||
-                    adBait.offsetHeight === 0 ||
-                    adBait.offsetParent === null ||
-                    baitStyle.opacity === '0'
+                    baitStyle.height === '0px' ||        
+                    parseInt(baitStyle.height, 10) === 0 || 
+                    adBait.offsetHeight === 0 ||           
+                    adBait.offsetParent === null ||      
+                    baitStyle.opacity === '0'           
                 ) {
-                    adBlockerSuspected = true;
+                    adBlockerDetected = true;
+                    console.log('Ad blocker DETECTED based on bait element style/dimensions.');
                 } else {
-                    adBlockerSuspected = false;
+                    adBlockerDetected = false;
+                    console.log('Bait element seems visible. No ad blocker detected by this check.');
                 }
             } else {
-                adBlockerSuspected = true; // Bait removed from DOM
+                adBlockerDetected = true; 
+                console.log('Ad blocker DETECTED (bait element removed from DOM).');
             }
 
-            if (adBlockerSuspected) {
-                // Check if modal was already dismissed in this session
-                if (sessionStorage.getItem('adBlockModalDismissed') !== 'true') {
-                    console.log('Ad blocker suspected. Displaying modal.');
-                    if (adBlockModal) adBlockModal.style.display = 'flex';
-                } else {
-                    console.log('Ad blocker suspected, but modal was already dismissed this session.');
-                }
+            if (adBlockerDetected) {
+                console.log('Displaying adblock modal.');
+                if (adBlockModal) adBlockModal.style.display = 'flex'; 
             } else {
-                console.log('No ad blocker detected (or bait not blocked).');
+                console.log('Final check: No ad blocker detected by current checks.');
             }
-        }, 3000); // Increased timeout to 3 seconds
+        }, 3500); // Slightly increased timeout to 3.5 seconds
 
         if (adBlockModalCloseBtn) {
             adBlockModalCloseBtn.addEventListener('click', () => {
-                if (adBlockModal) adBlockModal.style.display = 'none';
-                sessionStorage.setItem('adBlockModalDismissed', 'true'); // Remember dismissal for this session
+                if (adBlockModal) adBlockModal.style.display = 'none'; 
+                sessionStorage.setItem('adBlockModalDismissed', 'true'); 
+                console.log('Ad block modal dismissed by user for this session.');
             });
         }
         if (adBlockModal) {
             adBlockModal.addEventListener('click', (event) => {
-                if (event.target === adBlockModal) {
+                if (event.target === adBlockModal) { 
                     adBlockModal.style.display = 'none';
-                    sessionStorage.setItem('adBlockModalDismissed', 'true'); // Remember dismissal
+                    sessionStorage.setItem('adBlockModalDismissed', 'true'); 
+                    console.log('Ad block modal dismissed by clicking overlay for this session.');
                 }
             });
         }
@@ -627,6 +620,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- End Ad Blocker Detection ---
 
     initializeApp();
-    detectAdBlocker();
+    detectAdBlocker(); 
 
 }); // End of DOMContentLoaded
