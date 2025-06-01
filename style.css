@@ -10,7 +10,7 @@
     --shadow-medium: 0 4px 8px rgba(0, 0, 0, 0.15);
     --font-family: 'Roboto', sans-serif;
     --header-height: 60px; /* Main header height */
-    --filter-bar-height: 50px; /* Approximate height for the new filter bar */
+    /* --filter-bar-height: 50px; /* Approximate height - not strictly needed if content defines height */
     --border-radius-lg: 12px;
     --border-radius-md: 6px;
     --transition-speed-fast: 0.2s;
@@ -21,8 +21,16 @@
     --search-border-color: #505050;
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     font-family: var(--font-family);
     background-color: var(--bg-primary);
@@ -31,7 +39,7 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    overflow-x: hidden;
+    overflow-x: hidden; /* Crucial for preventing horizontal scroll on bad responsive items */
 }
 
 /* --- Main Header Styles --- */
@@ -39,7 +47,7 @@ header {
     background-color: var(--bg-secondary);
     position: sticky;
     top: 0;
-    z-index: 1000; 
+    z-index: 1000;
     box-shadow: var(--shadow-light);
     border-bottom: 1px solid var(--border-color);
     height: var(--header-height);
@@ -50,55 +58,58 @@ header {
 
 .header-content {
     display: flex;
-    /* justify-content: space-between; */ /* Changed */
-    justify-content: flex-start;     /* Align items to the start */
     align-items: center;
     width: 100%;
-    max-width: 1600px; /* Max width for overall header content */
-    margin: 0 auto;    /* Center header content block */
-    gap: 15px;         /* Adjust this for space between logo-area and search-wrapper */
+    max-width: 1600px;
+    margin: 0 auto;
+    gap: 20px; /* Default gap between logo-area and search-wrapper */
 }
 
 .logo-area {
     display: flex;
     align-items: center;
-    gap: 25px; /* Space between logo text and random button */
-    flex-shrink: 0; /* Prevent logo area from shrinking if space is tight */
+    gap: 15px; /* Space between logo text and random button */
+    flex-shrink: 0;
 }
-.logo { 
-    display: flex; align-items: center; font-size: 1.5em; font-weight: 700; 
-    color: var(--text-primary); gap: 8px; text-decoration: none; 
-    transition: transform var(--transition-speed-fast) ease; 
+
+.logo {
+    display: flex;
+    align-items: center;
+    font-size: 1.5em;
+    font-weight: 700;
+    color: var(--text-primary);
+    gap: 8px;
+    text-decoration: none;
+    transition: transform var(--transition-speed-fast) ease;
 }
 .logo:hover { transform: scale(1.05); }
 .logo-icon { color: var(--accent-primary); font-size: 1.3em; line-height: 1; }
 .logo-text { font-size: 0.9em; font-weight: inherit; margin: 0; padding: 0; line-height: normal; display: inline; }
 
-.random-movie-btn { 
-    background-color: var(--accent-primary); color: white; border: none; 
-    padding: 8px 12px; border-radius: 20px; font-size: 0.85em; 
-    cursor: pointer; font-weight: 500; 
-    transition: background-color var(--transition-speed-fast) ease; 
-    white-space: nowrap; 
-    /* margin-left: 15px; /* Re-evaluate if needed with .logo-area gap */
+.random-movie-btn {
+    background-color: var(--accent-primary); color: white; border: none;
+    padding: 8px 12px; border-radius: 20px; font-size: 0.85em;
+    cursor: pointer; font-weight: 500;
+    transition: background-color var(--transition-speed-fast) ease;
+    white-space: nowrap;
 }
 .random-movie-btn:hover { background-color: var(--accent-secondary); }
 
-
 .header-main-search-wrapper {
-    flex-grow: 1; /* Allow this wrapper to consume remaining space */
+    flex-grow: 1; /* Takes up available space */
     display: flex;
-    justify-content: center; /* Center the search area within this wrapper */
+    justify-content: center; /* Centers the .header-search-area */
+    min-width: 0; /* Allows shrinking */
 }
 
 .header-search-area {
     display: flex;
-    width: 100%; 
-    max-width: 550px; /* << ADJUST THIS: Max width of the search bar itself */
+    width: 100%;
+    max-width: 550px; /* Adjust as needed for preferred search bar width */
 }
 
 #search-input {
-    flex-grow: 1; 
+    flex-grow: 1;
     padding: 10px 15px;
     border: 1px solid var(--search-border-color);
     border-radius: 40px;
@@ -114,43 +125,42 @@ header {
 #search-input::-webkit-search-results-decoration { -webkit-appearance: none; }
 
 
-/* --- NEW: Filter Bar Styles --- */
+/* --- Filter Bar Styles --- */
 .filter-bar {
-    background-color: var(--bg-secondary); 
+    background-color: var(--bg-secondary);
     padding: 8px 15px;
     border-bottom: 1px solid var(--border-color);
     box-shadow: var(--shadow-light);
     position: sticky;
-    top: var(--header-height); 
-    z-index: 999; 
+    top: var(--header-height); /* Stick below the main header */
+    z-index: 999;
     display: flex;
-    justify-content: center; 
+    justify-content: center;
 }
 
 .filter-bar-content {
     display: flex;
     align-items: center;
-    gap: 15px; /* INCREASED from 10px, adjust as needed */
+    gap: 15px; /* Space between filter elements */
     width: 100%;
-    max-width: 850px; 
-    flex-wrap: wrap; 
-    justify-content: space-around; 
+    max-width: 850px;
+    flex-wrap: wrap;
+    justify-content: space-around; /* Good default for wrapping items */
 }
 
-.header-filters { 
+.header-filters {
     flex-shrink: 0;
-    min-width: 180px;
+    min-width: 180px; /* Default min-width for hero/year filters */
     position: relative;
-    flex-grow: 1; 
-    max-width: 280px; 
+    flex-grow: 1;
+    max-width: 280px;
 }
-.custom-year-select-wrapper {
-    min-width: 160px;
-}
+.custom-year-select-wrapper { min-width: 160px; } /* Can be slightly smaller */
+
 .simple-filter-select {
     padding: 9px 12px; border: 1px solid var(--search-border-color); border-radius: 20px;
     background-color: var(--search-input-bg); color: var(--search-input-text);
-    font-size: 0.85em; outline: none; cursor: pointer; min-width: 150px; 
+    font-size: 0.85em; outline: none; cursor: pointer; min-width: 150px;
     height: 38px; appearance: none; -webkit-appearance: none; -moz-appearance: none;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%239aa0a6'%3E%3Cpath d='M8 11L3 6h10L8 11z'/%3E%3C/svg%3E");
     background-repeat: no-repeat; background-position: right 10px center; background-size: 10px;
@@ -159,7 +169,7 @@ header {
 .simple-filter-select option { background-color: var(--search-input-bg); color: var(--search-input-text); }
 
 .custom-hero-select-trigger,
-.custom-year-select-trigger { 
+.custom-year-select-trigger {
     background-color: var(--search-input-bg); color: var(--search-input-text); padding: 9px 12px; border: 1px solid var(--search-border-color); border-radius: 20px; font-size: 0.85em; cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; height: 38px;
 }
 .custom-hero-select-trigger .selected-hero-name,
@@ -170,7 +180,7 @@ header {
 .custom-year-select-trigger.open .arrow { transform: rotate(180deg); }
 
 .custom-hero-select-options,
-.custom-year-select-options { 
+.custom-year-select-options {
     position: absolute; top: calc(100% + 5px); left: 0; right: 0; background-color: var(--search-input-bg); border: 1px solid var(--search-border-color); border-radius: var(--border-radius-md); z-index: 1001; max-height: 280px; display: none; box-shadow: var(--shadow-medium); flex-direction: column;
 }
 .custom-hero-select-options.open,
@@ -194,11 +204,16 @@ header {
 .hero-options-list .no-hero-results,
 .year-options-list .no-year-results { padding: 10px 15px; color: var(--search-placeholder-text); font-style: italic; cursor: default; }
 
+/* --- Hero Section --- */
 .hero-section { background-color: var(--accent-primary); color: var(--bg-primary); padding: 40px 20px; text-align: center; }
 .hero-content-wrapper { max-width: 900px; margin: 0 auto; }
 .hero-section h2 { font-size: 2.2em; margin-bottom: 15px; font-weight: 700; line-height: 1.2; }
 .hero-section p { font-size: 1.1em; line-height: 1.6; color: #f0f0f0; margin-bottom: 20px; }
+
+/* --- Ad Placeholders --- */
 .ad-placeholder { width: 100%; max-width: 728px; min-height: 90px; background-color: #e9e9e9; border: 1px dashed #cccccc; display: flex; align-items: center; justify-content: center; margin: 25px auto; text-align: center; color: #777777; font-size: 0.9em; font-style: italic; overflow: hidden; }
+
+/* --- Main Content & Movie Grid --- */
 main { flex-grow: 1; padding: 25px 20px; width: 100%; max-width: 1600px; margin: 0 auto; }
 .movie-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 25px 15px; }
 .movie-item { background-color: transparent; border: none; cursor: pointer; display: flex; flex-direction: column; text-decoration: none; color: inherit; opacity: 0; transform: translateY(20px); animation: fadeInItem var(--transition-speed-medium) ease-out forwards; position: relative; }
@@ -219,106 +234,162 @@ main { flex-grow: 1; padding: 25px 20px; width: 100%; max-width: 1600px; margin:
 .no-results { text-align: center; padding: 40px 20px; font-size: 1.2em; color: var(--text-secondary); width: 100%; grid-column: 1 / -1; opacity: 0; animation: fadeInItem 0.5s ease-out forwards; }
 footer { background-color: var(--bg-secondary); text-align: center; padding: 15px; font-size: 0.9em; color: var(--text-secondary); margin-top: auto; border-top: 1px solid var(--border-color); }
 
-
 /* --- Responsive Adjustments --- */
-@media (max-width: 992px) { /* Medium devices */
+
+/* Larger tablets and small desktops */
+@media (min-width: 769px) and (max-width: 992px) {
     .header-content {
-        flex-wrap: wrap;
-        justify-content: center; 
-    }
-    .logo-area {
-        width: 100%;
-        justify-content: center;
-        margin-bottom: 10px; 
+        gap: 20px; 
     }
     .header-main-search-wrapper {
-        width: 100%; 
-        max-width: 700px; 
-        order: 2; /* Make sure search comes after logo if it wraps */
+        max-width: 400px; /* Adjust max search width */
     }
     .filter-bar {
-        /* Ensure filter bar is also full width if main header content stacks */
-        width: 100%;
-        top: auto; /* If header height becomes variable due to logo stacking above search */
-        position: static; /* Can make it static for simplicity at this breakpoint too */
-        box-shadow: var(--shadow-light); /* Keep shadow if still looks good */
-        border-top: 1px solid var(--border-color); /* Add separator if it stacks */
+        top: var(--header-height); 
+        position: sticky;
     }
     .filter-bar-content {
-        justify-content: space-around; 
+        justify-content: center; 
+        gap: 12px; /* Slightly smaller gap between filters */
     }
     .header-filters, .simple-filter-select {
-        min-width: 160px; 
-        max-width: 250px;
-        flex-grow: 1; /* Allow them to take space if only 2 fit for example */
+        flex-grow: 0; /* Don't let them grow too much, rely on min-width */
+        min-width: 150px; 
+        max-width: 200px; /* Cap individual filter width */
     }
 }
 
-@media (max-width: 768px) { /* Small devices */
+/* Small devices (portrait phones and landscape phones) */
+@media (max-width: 768px) {
     header {
-        height: auto;
+        height: auto; 
         padding: 10px 15px; 
     }
     .header-content {
-        flex-direction: column; 
-        gap: 10px;
+        flex-direction: column; /* Stack logo area and search wrapper */
+        align-items: center; 
+        gap: 10px; 
     }
     .logo-area {
-        width: auto; 
-        margin-bottom: 0;
-        order: 1; /* Explicitly ensure logo area is first */
+        width: auto; /* Let it size by content */
+        margin-bottom: 5px; 
+        order: 1; 
     }
     .header-main-search-wrapper {
-        width: 100%;
-        max-width: 500px; 
-        order: 2; /* Search wrapper second */
-        margin-top: 5px; /* Small space from logo area */
+        order: 2;
+        width: 100%; 
+        max-width: 450px; 
+        margin-left: auto;
+        margin-right: auto;
     }
-    #search-input { padding: 10px 15px; }
+    #search-input { padding: 10px 15px; font-size: 0.9em;}
 
     .filter-bar {
         padding: 10px;
+        position: static; /* Scrolls with page if header height is auto */
+        box-shadow: var(--shadow-light); 
+        border-top: 1px solid var(--border-color); 
+        margin-top: 10px; 
+    }
+    .filter-bar-content {
+        flex-direction: row; /* Try to keep filters in a row */
+        flex-wrap: wrap;     /* Allow them to wrap */
+        justify-content: space-around; /* Distribute them */
+        gap: 8px; 
+    }
+    .header-filters, .simple-filter-select,
+    .custom-hero-select-wrapper, .custom-year-select-wrapper {
+        width: auto; 
+        min-width: 140px; /* Minimum touchable width */
+        flex-grow: 1; /* Allow them to share space when in a row */
+        max-width: calc(50% - 4px); /* Attempt to fit two per line (minus gap) */
+    }
+    /* If only one item on a wrapped line, let it take more space */
+    .filter-bar-content > *:last-child:not(:first-child) { /* More complex selector needed if not always 3 items */
+         /* max-width: 100%; Consider this if last item on wrapped line looks odd */
+    }
+
+
+    .hero-section { padding: 20px 15px; } 
+    .hero-section h2 { font-size: 1.7em; } 
+    .hero-section p { font-size: 0.95em; } 
+    .hero-bmc-button { font-size: 0.9em; padding: 10px 20px; }
+    .movie-grid { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); } 
+}
+
+/* Specific overrides for landscape mode on smaller devices if screen height is restrictive */
+@media (max-width: 768px) and (max-height: 450px) and (orientation: landscape) {
+    .header-content {
+        flex-direction: row; /* Try to keep logo and search side-by-side in shallow landscape */
+        justify-content: space-between; 
+        gap: 10px; /* Reduce gap */
+    }
+    .logo-area { width: auto; margin-bottom: 0; }
+    .header-main-search-wrapper {
+        order: 0; 
+        flex-grow: 1; 
+        max-width: 300px; /* Further reduce search width */
+    }
+    .filter-bar {
+        margin-top: 5px;
+        padding: 5px 10px;
+         /* If header becomes fixed height again in this specific view, sticky could work */
+        /* position: sticky; */
+        /* top: var(--header-height); */
+    }
+    .filter-bar-content {
+        gap: 5px;
+    }
+    .header-filters, .simple-filter-select {
+        min-width: 120px; /* Allow filters to be narrower */
+        max-width: 160px;
+        font-size: 0.8em; /* Smaller font in filters */
+        height: 34px; /* Slightly shorter */
+        padding: 7px 10px;
+    }
+    .custom-hero-select-trigger, .custom-year-select-trigger {
+        font-size: 0.8em;
+        height: 34px;
+        padding: 7px 10px;
+    }
+    .simple-filter-select { padding-right: 25px; } /* Adjust for arrow */
+
+    .movie-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+}
+
+
+@media (max-width: 480px) { /* Extra small devices (mostly portrait) */
+    .header-content {
+        flex-direction: column; 
+        gap: 10px; 
+    }
+    .logo-area { order: 1; }
+    .header-main-search-wrapper { order: 2; width: 100%; max-width: 100%; margin-top: 0;}
+
+    .filter-bar {
+        margin-top: 8px;
         position: static; 
-        box-shadow: none;
-        border-top: 1px solid var(--border-color); /* Separator from header */
-        margin-top: 10px; /* Space from header elements */
     }
     .filter-bar-content {
         flex-direction: column; 
         gap: 10px;
-        align-items: stretch; 
     }
     .header-filters, .simple-filter-select,
     .custom-hero-select-wrapper, .custom-year-select-wrapper {
-        width: 100%; 
-        min-width: 0;
-        max-width: none; 
+        width: 100%; /* Filters take full width and stack */
+        max-width: none;
     }
-    .custom-hero-select-trigger, .custom-year-select-trigger, .simple-filter-select {
-        font-size: 0.9em;
-        padding: 10px 15px;
-    }
-
-    .hero-section { padding: 25px 15px; } .hero-section h2 { font-size: 1.8em; } .hero-section p { font-size: 1em; } .hero-bmc-button { font-size: 0.95em; padding: 11px 22px; } .ad-placeholder { margin: 20px auto; height: auto; min-height: 60px;} main { padding: 15px 10px; } .movie-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px 10px; }
-}
-
-@media (max-width: 480px) { /* Extra small devices */
-    .header-content { gap: 8px; }
-    .logo { font-size: 1.3em; }
-    .header-main-search-wrapper { margin-top: 0; }
     #search-input, .custom-hero-select-trigger, .custom-year-select-trigger,
     .hero-options-search-input, .year-options-search-input, .simple-filter-select {
         padding: 9px 14px;
         font-size: 0.85em;
     }
-    .filter-bar { margin-top: 8px; }
-    .hero-section h2 { font-size: 1.6em; }
-    .hero-bmc-button { font-size: 0.9em; padding: 10px 20px; }
+    .hero-section h2 { font-size: 1.5em; }
     .custom-hero-select-options, .custom-year-select-options { max-height: 180px; }
     #adblock-modal-content { max-width: 90%; padding: 15px; }
     #adblock-modal-title { font-size: 1.1em; }
     #adblock-modal-text { font-size: 0.85em; }
-    .movie-grid { grid-template-columns: 1fr; gap: 20px; } 
+    .movie-grid { grid-template-columns: 1fr; }
 }
 
 /* --- Buy Me A Coffee Button in Hero Section --- */
