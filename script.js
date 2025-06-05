@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const MOVIES_DATA_URL = 'https://mana-hero-movies.digimoviesvault.workers.dev/movies';
     const HEROES_DATA_URL = 'https://mana-hero-movies.digimoviesvault.workers.dev/heroes';
 
-    const MOVIES_PER_PAGE = 12;
+    const MOVIES_PER_PAGE = 20;
     const SCROLL_THRESHOLD = 300;
     const SEARCH_DEBOUNCE_MS = 350;
     const LOAD_MORE_DELAY_MS = 50;
